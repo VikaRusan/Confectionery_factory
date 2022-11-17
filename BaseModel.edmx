@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Кондитерская_фабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Заказы">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+          </Key>
+          <Property Name="Код_заказа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_изделия" Type="int" />
+          <Property Name="Наименование_покупателя" Type="varchar" MaxLength="50" />
+          <Property Name="ФИО_менеджера" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Количество_продукции" Type="int" Nullable="false" />
+          <Property Name="Стоимость" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Телефон_покупателя" Type="varchar" MaxLength="12" />
+          <Property Name="Статус" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Затраты">
+          <Key>
+            <PropertyRef Name="Код_затрат" />
+          </Key>
+          <Property Name="Код_затрат" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_изделия" Type="int" />
+          <Property Name="Код_сырья" Type="int" />
+          <Property Name="Количество_затрат" Type="int" />
+        </EntityType>
+        <EntityType Name="Изделия">
+          <Key>
+            <PropertyRef Name="Код_изделия" />
+          </Key>
+          <Property Name="Код_изделия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+          <Property Name="Категория" Type="varchar" MaxLength="50" />
+          <Property Name="Цена_шт" Type="float" />
+        </EntityType>
+        <EntityType Name="Поставки_изделий">
+          <Key>
+            <PropertyRef Name="Код_пост_изд" />
+          </Key>
+          <Property Name="Код_пост_изд" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_заказа" Type="int" />
+          <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
+          <Property Name="Телефон_поставщика" Type="varchar" MaxLength="12" />
+          <Property Name="Адрес_покупателя" Type="varchar" MaxLength="50" />
+          <Property Name="Телефон_покупателя" Type="varchar" MaxLength="12" />
+          <Property Name="Дата_поставки" Type="date" />
+          <Property Name="Статус" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Поставки_сырья">
+          <Key>
+            <PropertyRef Name="Код_поставки" />
+          </Key>
+          <Property Name="Код_поставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_сырья" Type="int" />
+          <Property Name="ФИО_менеджера" Type="varchar" MaxLength="50" />
+          <Property Name="Дата_поставки" Type="date" />
+          <Property Name="Количество_сырья" Type="int" />
+          <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес_поставщика" Type="varchar" MaxLength="50" />
+          <Property Name="Телефон_поставщика" Type="varchar" MaxLength="12" />
+          <Property Name="Статус" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Сырье">
+          <Key>
+            <PropertyRef Name="Код_сырья" />
+          </Key>
+          <Property Name="Код_сырья" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Вид" Type="varchar" MaxLength="50" />
+          <Property Name="Цена" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Заказы_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="0..1" />
+          <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="Заказы">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Затраты_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="0..1" />
+          <End Role="Затраты" Type="Self.Затраты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="Затраты">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Затраты_Сырье">
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="0..1" />
+          <End Role="Затраты" Type="Self.Затраты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сырье">
+              <PropertyRef Name="Код_сырья" />
+            </Principal>
+            <Dependent Role="Затраты">
+              <PropertyRef Name="Код_сырья" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставки_изделий_Заказы">
+          <End Role="Заказы" Type="Self.Заказы" Multiplicity="0..1" />
+          <End Role="Поставки_изделий" Type="Self.Поставки_изделий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказы">
+              <PropertyRef Name="Код_заказа" />
+            </Principal>
+            <Dependent Role="Поставки_изделий">
+              <PropertyRef Name="Код_заказа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставки_сырья_Сырье">
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="0..1" />
+          <End Role="Поставки_сырья" Type="Self.Поставки_сырья" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сырье">
+              <PropertyRef Name="Код_сырья" />
+            </Principal>
+            <Dependent Role="Поставки_сырья">
+              <PropertyRef Name="Код_сырья" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище Кондитерская_фабрикаModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заказы" EntityType="Self.Заказы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Затраты" EntityType="Self.Затраты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Изделия" EntityType="Self.Изделия" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставки_изделий" EntityType="Self.Поставки_изделий" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставки_сырья" EntityType="Self.Поставки_сырья" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сырье" EntityType="Self.Сырье" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Заказы_Изделия" Association="Self.FK_Заказы_Изделия">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Заказы" EntitySet="Заказы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Затраты_Изделия" Association="Self.FK_Затраты_Изделия">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Затраты" EntitySet="Затраты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Затраты_Сырье" Association="Self.FK_Затраты_Сырье">
+            <End Role="Сырье" EntitySet="Сырье" />
+            <End Role="Затраты" EntitySet="Затраты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставки_изделий_Заказы" Association="Self.FK_Поставки_изделий_Заказы">
+            <End Role="Заказы" EntitySet="Заказы" />
+            <End Role="Поставки_изделий" EntitySet="Поставки_изделий" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставки_сырья_Сырье" Association="Self.FK_Поставки_сырья_Сырье">
+            <End Role="Сырье" EntitySet="Сырье" />
+            <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Кондитерская_фабрикаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Заказы">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+          </Key>
+          <Property Name="Код_заказа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_изделия" Type="Int32" />
+          <Property Name="Наименование_покупателя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ФИО_менеджера" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Количество_продукции" Type="Int32" Nullable="false" />
+          <Property Name="Стоимость" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Статус" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Изделия" Relationship="Self.FK_Заказы_Изделия" FromRole="Заказы" ToRole="Изделия" />
+          <NavigationProperty Name="Поставки_изделий" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Заказы" ToRole="Поставки_изделий" />
+        </EntityType>
+        <EntityType Name="Затраты">
+          <Key>
+            <PropertyRef Name="Код_затрат" />
+          </Key>
+          <Property Name="Код_затрат" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_изделия" Type="Int32" />
+          <Property Name="Код_сырья" Type="Int32" />
+          <Property Name="Количество_затрат" Type="Int32" />
+          <NavigationProperty Name="Изделия" Relationship="Self.FK_Затраты_Изделия" FromRole="Затраты" ToRole="Изделия" />
+          <NavigationProperty Name="Сырье" Relationship="Self.FK_Затраты_Сырье" FromRole="Затраты" ToRole="Сырье" />
+        </EntityType>
+        <EntityType Name="Изделия">
+          <Key>
+            <PropertyRef Name="Код_изделия" />
+          </Key>
+          <Property Name="Код_изделия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Категория" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Цена_шт" Type="Double" />
+          <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Изделия" FromRole="Изделия" ToRole="Заказы" />
+          <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Изделия" FromRole="Изделия" ToRole="Затраты" />
+        </EntityType>
+        <EntityType Name="Поставки_изделий">
+          <Key>
+            <PropertyRef Name="Код_пост_изд" />
+          </Key>
+          <Property Name="Код_пост_изд" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_заказа" Type="Int32" />
+          <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Телефон_поставщика" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес_покупателя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_поставки" Type="DateTime" Precision="0" />
+          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Заказы" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Поставки_изделий" ToRole="Заказы" />
+        </EntityType>
+        <EntityType Name="Поставки_сырья">
+          <Key>
+            <PropertyRef Name="Код_поставки" />
+          </Key>
+          <Property Name="Код_поставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_сырья" Type="Int32" />
+          <Property Name="ФИО_менеджера" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_поставки" Type="DateTime" Precision="0" />
+          <Property Name="Количество_сырья" Type="Int32" />
+          <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Телефон_поставщика" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Статус" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Сырье" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Поставки_сырья" ToRole="Сырье" />
+        </EntityType>
+        <EntityType Name="Сырье">
+          <Key>
+            <PropertyRef Name="Код_сырья" />
+          </Key>
+          <Property Name="Код_сырья" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Вид" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Цена" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Сырье" FromRole="Сырье" ToRole="Затраты" />
+          <NavigationProperty Name="Поставки_сырья" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Сырье" ToRole="Поставки_сырья" />
+        </EntityType>
+        <Association Name="FK_Заказы_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="0..1" />
+          <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="Заказы">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставки_изделий_Заказы">
+          <End Role="Заказы" Type="Self.Заказы" Multiplicity="0..1" />
+          <End Role="Поставки_изделий" Type="Self.Поставки_изделий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказы">
+              <PropertyRef Name="Код_заказа" />
+            </Principal>
+            <Dependent Role="Поставки_изделий">
+              <PropertyRef Name="Код_заказа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Затраты_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="0..1" />
+          <End Role="Затраты" Type="Self.Затраты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="Затраты">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Затраты_Сырье">
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="0..1" />
+          <End Role="Затраты" Type="Self.Затраты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сырье">
+              <PropertyRef Name="Код_сырья" />
+            </Principal>
+            <Dependent Role="Затраты">
+              <PropertyRef Name="Код_сырья" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставки_сырья_Сырье">
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="0..1" />
+          <End Role="Поставки_сырья" Type="Self.Поставки_сырья" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сырье">
+              <PropertyRef Name="Код_сырья" />
+            </Principal>
+            <Dependent Role="Поставки_сырья">
+              <PropertyRef Name="Код_сырья" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Кондитерская_фабрикаEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Заказы" EntityType="Self.Заказы" />
+          <EntitySet Name="Затраты" EntityType="Self.Затраты" />
+          <EntitySet Name="Изделия" EntityType="Self.Изделия" />
+          <EntitySet Name="Поставки_изделий" EntityType="Self.Поставки_изделий" />
+          <EntitySet Name="Поставки_сырья" EntityType="Self.Поставки_сырья" />
+          <EntitySet Name="Сырье" EntityType="Self.Сырье" />
+          <AssociationSet Name="FK_Заказы_Изделия" Association="Self.FK_Заказы_Изделия">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Заказы" EntitySet="Заказы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставки_изделий_Заказы" Association="Self.FK_Поставки_изделий_Заказы">
+            <End Role="Заказы" EntitySet="Заказы" />
+            <End Role="Поставки_изделий" EntitySet="Поставки_изделий" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Затраты_Изделия" Association="Self.FK_Затраты_Изделия">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Затраты" EntitySet="Затраты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Затраты_Сырье" Association="Self.FK_Затраты_Сырье">
+            <End Role="Сырье" EntitySet="Сырье" />
+            <End Role="Затраты" EntitySet="Затраты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставки_сырья_Сырье" Association="Self.FK_Поставки_сырья_Сырье">
+            <End Role="Сырье" EntitySet="Сырье" />
+            <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Кондитерская_фабрикаModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Кондитерская_фабрикаModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Кондитерская_фабрикаModelContainer" CdmEntityContainer="Кондитерская_фабрикаEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заказы">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Заказы">
+              <MappingFragment StoreEntitySet="Заказы">
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+                <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
+                <ScalarProperty Name="Наименование_покупателя" ColumnName="Наименование_покупателя" />
+                <ScalarProperty Name="ФИО_менеджера" ColumnName="ФИО_менеджера" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Количество_продукции" ColumnName="Количество_продукции" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Телефон_покупателя" ColumnName="Телефон_покупателя" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Затраты">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Затраты">
+              <MappingFragment StoreEntitySet="Затраты">
+                <ScalarProperty Name="Код_затрат" ColumnName="Код_затрат" />
+                <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
+                <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
+                <ScalarProperty Name="Количество_затрат" ColumnName="Количество_затрат" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Изделия">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Изделия">
+              <MappingFragment StoreEntitySet="Изделия">
+                <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Категория" ColumnName="Категория" />
+                <ScalarProperty Name="Цена_шт" ColumnName="Цена_шт" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставки_изделий">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Поставки_изделий">
+              <MappingFragment StoreEntitySet="Поставки_изделий">
+                <ScalarProperty Name="Код_пост_изд" ColumnName="Код_пост_изд" />
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+                <ScalarProperty Name="Организация_поставщика" ColumnName="Организация_поставщика" />
+                <ScalarProperty Name="Телефон_поставщика" ColumnName="Телефон_поставщика" />
+                <ScalarProperty Name="Адрес_покупателя" ColumnName="Адрес_покупателя" />
+                <ScalarProperty Name="Телефон_покупателя" ColumnName="Телефон_покупателя" />
+                <ScalarProperty Name="Дата_поставки" ColumnName="Дата_поставки" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставки_сырья">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Поставки_сырья">
+              <MappingFragment StoreEntitySet="Поставки_сырья">
+                <ScalarProperty Name="Код_поставки" ColumnName="Код_поставки" />
+                <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
+                <ScalarProperty Name="ФИО_менеджера" ColumnName="ФИО_менеджера" />
+                <ScalarProperty Name="Дата_поставки" ColumnName="Дата_поставки" />
+                <ScalarProperty Name="Количество_сырья" ColumnName="Количество_сырья" />
+                <ScalarProperty Name="Организация_поставщика" ColumnName="Организация_поставщика" />
+                <ScalarProperty Name="Адрес_поставщика" ColumnName="Адрес_поставщика" />
+                <ScalarProperty Name="Телефон_поставщика" ColumnName="Телефон_поставщика" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сырье">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Сырье">
+              <MappingFragment StoreEntitySet="Сырье">
+                <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
+                <ScalarProperty Name="Вид" ColumnName="Вид" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Кондитерская_фабрикаModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Кондитерская_фабрикаModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

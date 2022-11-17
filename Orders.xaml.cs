@@ -16,19 +16,24 @@ using System.Windows.Shapes;
 namespace Confectionery_factory
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Confectionery.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Orders : Page
     {
-        public MainWindow()
+        public Orders()
         {
             InitializeComponent();
-            Manager.MainFrame = MainFrame;
+            DGridOrders.ItemsSource = Кондитерская_фабрикаEntities.GetContext().Заказы.ToList();
         }
 
-        private void Orders_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new Orders());
+            Manager.MainFrame.Navigate(new AddEditPage());
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
