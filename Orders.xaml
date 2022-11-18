@@ -10,10 +10,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="377*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="DGridOrders" AutoGenerateColumns="False" IsReadOnly="True">
+        <TextBlock Grid.Row="0" Foreground="#B15124	" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Заказы"></TextBlock>
+
+        <DataGrid x:Name="DGridOrders" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа" Binding="{Binding Код_заказа}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Наименование изделия" Binding="{Binding Изделия.Наименование_изделия}" Width="*"></DataGridTextColumn>
