@@ -12,17 +12,18 @@ namespace Confectionery_factory
     using System;
     using System.Collections.Generic;
     
-    public partial class Поставки_изделий
+    public partial class Категории
     {
-        public int Код_пост_изд { get; set; }
-        public int Код_заказа { get; set; }
-        public string Организация_поставщика { get; set; }
-        public string Телефон_поставщика { get; set; }
-        public string Адрес_покупателя { get; set; }
-        public string Телефон_покупателя { get; set; }
-        public Nullable<System.DateTime> Дата_поставки { get; set; }
-        public string Статус { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Категории()
+        {
+            this.Изделия = new HashSet<Изделия>();
+        }
     
-        public virtual Заказы Заказы { get; set; }
+        public int Код_категории { get; set; }
+        public string Наименование { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Изделия> Изделия { get; set; }
     }
 }

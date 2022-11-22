@@ -21,7 +21,7 @@ namespace Confectionery_factory
         }
     
         public int Код_заказа { get; set; }
-        public Nullable<int> Код_изделия { get; set; }
+        public int Код_изделия { get; set; }
         public string Наименование_покупателя { get; set; }
         public string ФИО_менеджера { get; set; }
         public System.DateTime Дата { get; set; }

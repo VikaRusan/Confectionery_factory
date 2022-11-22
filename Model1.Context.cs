@@ -15,18 +15,18 @@ namespace Confectionery_factory
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Кондитерская_фабрикаEntities : DbContext
+    public partial class Кондитерская_фабрикаEntities1 : DbContext
     {
-        private static Кондитерская_фабрикаEntities _context;
-        public Кондитерская_фабрикаEntities()
-            : base("name=Кондитерская_фабрикаEntities")
+        private static Кондитерская_фабрикаEntities1 _context;
+        public Кондитерская_фабрикаEntities1()
+            : base("name=Кондитерская_фабрикаEntities1")
         {
         }
     
-        public static Кондитерская_фабрикаEntities GetContext()
+        public static Кондитерская_фабрикаEntities1 GetContext()
         {
             if (_context == null)
-                _context = new Кондитерская_фабрикаEntities();
+                _context = new Кондитерская_фабрикаEntities1();
             return _context;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -38,6 +38,7 @@ namespace Confectionery_factory
         public virtual DbSet<Заказы> Заказы { get; set; }
         public virtual DbSet<Затраты> Затраты { get; set; }
         public virtual DbSet<Изделия> Изделия { get; set; }
+        public virtual DbSet<Категории> Категории { get; set; }
         public virtual DbSet<Поставки_изделий> Поставки_изделий { get; set; }
         public virtual DbSet<Поставки_сырья> Поставки_сырья { get; set; }
         public virtual DbSet<Сырье> Сырье { get; set; }

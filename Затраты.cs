@@ -15,8 +15,8 @@ namespace Confectionery_factory
     public partial class Затраты
     {
         public int Код_затрат { get; set; }
-        public Nullable<int> Код_изделия { get; set; }
-        public Nullable<int> Код_сырья { get; set; }
+        public int Код_изделия { get; set; }
+        public int Код_сырья { get; set; }
         public Nullable<int> Количество_затрат { get; set; }
     
         public virtual Изделия Изделия { get; set; }

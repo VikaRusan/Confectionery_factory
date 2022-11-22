@@ -15,7 +15,7 @@ namespace Confectionery_factory
     public partial class Поставки_сырья
     {
         public int Код_поставки { get; set; }
-        public Nullable<int> Код_сырья { get; set; }
+        public int Код_сырья { get; set; }
         public string ФИО_менеджера { get; set; }
         public Nullable<System.DateTime> Дата_поставки { get; set; }
         public Nullable<int> Количество_сырья { get; set; }

@@ -14,15 +14,15 @@
             <RowDefinition Height="377*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Foreground="#B15124	" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Заказы"></TextBlock>
+        <TextBlock Grid.Row="0" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Заказы"></TextBlock>
 
         <DataGrid x:Name="DGridOrders" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа" Binding="{Binding Код_заказа}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Наименование изделия" Binding="{Binding Изделия.Наименование_изделия}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Наименование изделия" Binding="{Binding Изделия.Наименование}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Наименование покупателя" Binding="{Binding Наименование_покупателя}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО менеджера" Binding="{Binding ФИО_менеджера}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Дата}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Дата, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество продукции" Binding="{Binding Количество_продукции}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон покупателя" Binding="{Binding Телефон_покупателя}" Width="*"></DataGridTextColumn>
