@@ -20,7 +20,7 @@ namespace Confectionery_factory
         public string Телефон_поставщика { get; set; }
         public string Адрес_покупателя { get; set; }
         public string Телефон_покупателя { get; set; }
-        public Nullable<System.DateTime> Дата_поставки { get; set; }
+        public System.DateTime Дата_поставки { get; set; }
         public string Статус { get; set; }
     
         public virtual Заказы Заказы { get; set; }

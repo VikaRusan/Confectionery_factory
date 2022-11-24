@@ -25,7 +25,7 @@ namespace Confectionery_factory
         {
             InitializeComponent();
             DataContext = _currentOrder;
-            ComboConfectionery.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
+            ComboConfectionery.ItemsSource = Кондитерская_фабрикаEntities.GetContext().Изделия.ToList();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -40,8 +40,7 @@ namespace Confectionery_factory
                 errors.AppendLine("Укажите количество продукции");
             if (string.IsNullOrWhiteSpace(_currentOrder.Телефон_покупателя))
                 errors.AppendLine("Укажите телефон покупателя");
-            if (string.IsNullOrWhiteSpace(_currentOrder.Дата.ToString()))
-                errors.AppendLine("Укажите дату заказа");
+
 
             if (errors.Length > 0)
             {
@@ -49,11 +48,11 @@ namespace Confectionery_factory
                 return;
             }
             if (_currentOrder.Код_заказа == 0)
-                Кондитерская_фабрикаEntities1.GetContext().Заказы.Add(_currentOrder);
+                Кондитерская_фабрикаEntities.GetContext().Заказы.Add(_currentOrder);
 
             try
             {
-                Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
+                Кондитерская_фабрикаEntities.GetContext().SaveChanges();
                 MessageBox.Show("Данные сохранены");
             }
             catch (Exception ex)

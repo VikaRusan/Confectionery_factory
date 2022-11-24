@@ -24,7 +24,7 @@ namespace Confectionery_factory
         public Orders()
         {
             InitializeComponent();
-            DGridOrders.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Заказы.ToList();
+            DGridOrders.ItemsSource = Кондитерская_фабрикаEntities.GetContext().Заказы.ToList();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
