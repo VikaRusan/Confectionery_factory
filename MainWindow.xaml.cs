@@ -20,6 +20,7 @@ namespace Confectionery_factory
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +30,11 @@ namespace Confectionery_factory
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new Orders());
+        }
+
+        private void SupplyRawMaterials_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new SupplyRawMaterialsPage());
         }
     }
 }

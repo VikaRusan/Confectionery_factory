@@ -17,10 +17,10 @@
         <Grid Background="#FCD778" Panel.ZIndex="-2"></Grid>
         <Menu Grid.Row ="1" Height="30" VerticalAlignment="Top" FontSize="18" Background="#FDF4E3">
                 <MenuItem x:Name="Orders" Header="Заказы" Click="Orders_Click" ></MenuItem>
-                <MenuItem x:Name="SupplyRawMaterials" Header="Поставки сырья"></MenuItem>
+                <MenuItem x:Name="SupplyRawMaterials" Header="Поставки сырья" Click="SupplyRawMaterials_Click"></MenuItem>
                 <MenuItem x:Name="Supply" Header="Поставки изделий"></MenuItem>
             </Menu>
-        <Frame Grid.Row="2" Name="MainFrame"></Frame>
+        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden" ></Frame>
         <Grid Grid.Row="3" Background="#FFA000"></Grid>
     </Grid>
 </Window>

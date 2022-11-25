@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,43 +16,42 @@ using System.Windows.Shapes;
 namespace Confectionery_factory
 {
     /// <summary>
-    /// Логика взаимодействия для Confectionery.xaml
+    /// Логика взаимодействия для SupplyRawMaterialsPage.xaml
     /// </summary>
-    public partial class Orders : Page
+    public partial class SupplyRawMaterialsPage : Page
     {
-        public Orders()
+        public SupplyRawMaterialsPage()
         {
             InitializeComponent();
-            DGridOrders.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Заказы.ToList();
+            DGridSupplyRawMaterials.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Поставки_сырья.ToList();
         }
-
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditOrder(null));
+            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditOrder(null));
+            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
         }
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditOrder((sender as Button).DataContext as Заказы));
+            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials((sender as Button).DataContext as Поставки_сырья));
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var ordersForRemoving = DGridOrders.SelectedItems.Cast<Заказы>().ToList();
+            var supplyRawMaterialsForRemoving = DGridSupplyRawMaterials.SelectedItems.Cast<Поставки_сырья>().ToList();
 
-            if (MessageBox.Show("Вы точно хотите удалить следующие " + ordersForRemoving.Count() + " элементов?", "Внимание",
+            if (MessageBox.Show("Вы точно хотите удалить следующие " + supplyRawMaterialsForRemoving.Count() + " элементов?", "Внимание",
             MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    foreach (var entity in DGridOrders.SelectedItems.Cast<Заказы>().ToList())
-                        Кондитерская_фабрикаEntities1.GetContext().Заказы.Remove(entity);
+                    foreach (var entity in DGridSupplyRawMaterials.SelectedItems.Cast<Поставки_сырья>().ToList())
+                        Кондитерская_фабрикаEntities1.GetContext().Поставки_сырья.Remove(entity);
                     Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
                     MessageBox.Show("Данные удалены");
 
-                    DGridOrders.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Заказы.ToList();
+                    DGridSupplyRawMaterials.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Поставки_сырья.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -66,7 +64,7 @@ namespace Confectionery_factory
             if (Visibility == Visibility.Visible)
             {
                 Кондитерская_фабрикаEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-                DGridOrders.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Заказы.ToList();
+                DGridSupplyRawMaterials.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Поставки_сырья.ToList();
             }
         }
     }

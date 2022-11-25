@@ -18,10 +18,10 @@ namespace Confectionery_factory
     /// <summary>
     /// Логика взаимодействия для AddEditPage.xaml
     /// </summary>
-    public partial class AddEditPage : Page
+    public partial class AddEditOrder : Page
     {
         private Заказы _currentOrder = new Заказы();
-        public AddEditPage(Заказы selectedOrder)
+        public AddEditOrder(Заказы selectedOrder)
         {
             if (selectedOrder != null)
             {
