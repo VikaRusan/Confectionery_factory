@@ -21,9 +21,14 @@ namespace Confectionery_factory
     public partial class AddEditPage : Page
     {
         private Заказы _currentOrder = new Заказы();
-        public AddEditPage()
+        public AddEditPage(Заказы selectedOrder)
         {
+            if (selectedOrder != null)
+            {
+                _currentOrder = selectedOrder;
+            }
             InitializeComponent();
+            
             DataContext = _currentOrder;
             ComboConfectionery.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
         }
@@ -55,6 +60,7 @@ namespace Confectionery_factory
             {
                 Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
                 MessageBox.Show("Данные сохранены");
+                Manager.MainFrame.GoBack();
             }
             catch (Exception ex)
             {

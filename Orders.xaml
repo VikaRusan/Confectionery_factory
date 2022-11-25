@@ -24,19 +24,20 @@
                 <DataGridTextColumn Header="ФИО менеджера" Binding="{Binding ФИО_менеджера}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Дата, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество продукции" Binding="{Binding Количество_продукции}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена шт" Binding="{Binding Изделия.Цена_шт, StringFormat={}{0} руб.}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость, StringFormat={}{0} руб.}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон покупателя" Binding="{Binding Телефон_покупателя}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Статус" Binding="{Binding Статус}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Name="BtnEdit" ></Button>
+                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Добавить" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click"/>
-        <Button Content="Удалить" Grid.Row="2" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" ></Button>
+        <Button Content="Удалить" Grid.Row="2" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click"></Button>
     </Grid>
 </Page>

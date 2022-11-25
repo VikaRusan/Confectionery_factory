@@ -23,13 +23,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Регистрация нового заказа"/>
-        <TextBlock Text="Наименование изделия" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBlock Text="Наименование покупателя" Grid.Row="1" Margin="0,56,0,56" Grid.RowSpan="3"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Заказ"/>
+        <TextBlock Text="Наименование изделия" Grid.Row="1" />
+        <TextBlock Text="Наименование покупателя" Grid.Row="2" ></TextBlock>
         <TextBlock Text="ФИО менеджера" Grid.Row="3"></TextBlock>
         <TextBlock Text="Количество продукции" Grid.Row="4"></TextBlock>
-        <TextBlock Text="Телефон покупателя" Grid.Row="4" Margin="0,56,0,56" Grid.RowSpan="3"></TextBlock>
-        <TextBlock Text="Дата" Grid.Row="6" Margin="0,0,0,56" Grid.RowSpan="2"></TextBlock>
+        <TextBlock Text="Телефон покупателя" Grid.Row="5" ></TextBlock>
+        <TextBlock Text="Дата" Grid.Row="6" ></TextBlock>
         <ComboBox SelectedItem="{Binding Изделия}" Grid.Row="1" Grid.Column="1" x:Name="ComboConfectionery" DisplayMemberPath="Наименование" />
         <TextBox Text="{Binding Наименование_покупателя}" Grid.Column="2" Grid.Row="2"></TextBox>
         <TextBox Text="{Binding ФИО_менеджера}" Grid.Column="1" Grid.Row="3"></TextBox>
