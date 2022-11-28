@@ -16,17 +16,18 @@ using System.Windows.Shapes;
 namespace Confectionery_factory
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PageMenuAdmin.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageMenuAdmin : Page
     {
-
-        public MainWindow()
+        public PageMenuAdmin()
         {
             InitializeComponent();
-            Manager.MainFrame = MainFrame;
-            AppConnect.modelOdb = new Кондитерская_фабрикаEntities1();
-            MainFrame.Navigate(new Authorization());
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.GoBack();
         }
     }
 }

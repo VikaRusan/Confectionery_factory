@@ -12,26 +12,18 @@ namespace Confectionery_factory
     using System;
     using System.Collections.Generic;
     
-    public partial class Заказы
+    public partial class Роли
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Заказы()
+        public Роли()
         {
-            this.Поставки_изделий = new HashSet<Поставки_изделий>();
+            this.Пользователь = new HashSet<Пользователь>();
         }
     
-        public int Код_заказа { get; set; }
-        public int Код_изделия { get; set; }
-        public string Наименование_покупателя { get; set; }
-        public string ФИО_менеджера { get; set; }
-        public System.DateTime Дата { get; set; }
-        public int Количество_продукции { get; set; }
-        public Nullable<decimal> Стоимость { get; set; }
-        public string Телефон_покупателя { get; set; }
-        public string Статус { get; set; }
+        public int Код { get; set; }
+        public string Имя { get; set; }
     
-        public virtual Изделия Изделия { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Поставки_изделий> Поставки_изделий { get; set; }
+        public virtual ICollection<Пользователь> Пользователь { get; set; }
     }
 }

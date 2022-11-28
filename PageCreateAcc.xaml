@@ -1,0 +1,24 @@
+﻿<Page x:Class="Confectionery_factory.PageCreateAcc"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Confectionery_factory"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Регистрация">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="350">
+        <TextBlock FontSize="18" Foreground="#B15124" Text="Введите Имя:"></TextBlock>
+        <TextBox Name="txbName" FontSize="18" Width="250"></TextBox>
+        <TextBlock  FontSize="18" Foreground="#B15124" Text="Введите Логин:"></TextBlock>
+        <TextBox  Name="txbLogin" FontSize="18" Width="250"></TextBox>
+        <TextBlock FontSize="18" Foreground="#B15124" Text="Введите пароль:"/>
+        <TextBox Name="txbPass" FontSize="18" Width="250"/>
+        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Name="psbPass" Margin="0 10 0 0" FontSize="18" Width="250"/>
+        <Grid>
+            <Button Name="btnCreate" FontSize="18" FontWeight="Bold" Foreground="#B15124" Background="#FCD778" Margin="0 10 0 0" HorizontalAlignment="Left" Width="150" Content="Создать" IsEnabled="False" Click="btnCreate_Click" />
+            <Button FontSize="18" FontWeight="Bold" Foreground="#B15124" Background="#FCD778" Margin="0 10 0 0" HorizontalAlignment="Right" Width="150"  Content="Назад" Click="Button_Click"/>
+        </Grid>
+    </StackPanel>
+</Page>

@@ -16,17 +16,23 @@ using System.Windows.Shapes;
 namespace Confectionery_factory
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Menu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Menu : Page
     {
-
-        public MainWindow()
+        public Menu()
         {
+            Manager.MainFrameMenu = MainFrameMenu;
             InitializeComponent();
-            Manager.MainFrame = MainFrame;
-            AppConnect.modelOdb = new Кондитерская_фабрикаEntities1();
-            MainFrame.Navigate(new Authorization());
+        }
+        private void Orders_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrameMenu.Navigate(new Orders());
+        }
+
+        private void SupplyRawMaterials_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrameMenu.Navigate(new SupplyRawMaterialsPage());
         }
     }
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Confectionery_factory
 {
-    internal class Manager
+    internal class AppConnect
     {
-        public static Frame MainFrame { get; set; }
-        public static Frame MainFrameMenu { get; set; }
+        public static Кондитерская_фабрикаEntities1 modelOdb;
     }
 }

@@ -19,6 +19,9 @@
         <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Затраты_Сырье" ManuallyRouted="false" />
         <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Изделия_Категории" ManuallyRouted="false" />
         <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Поставки_сырья_Сырье" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Пользователь" Width="1.5" PointX="9.625" PointY="0.875" />
+        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Роли" Width="1.5" PointX="7.375" PointY="1.25" />
+        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Пользователь_Роли" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

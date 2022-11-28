@@ -17,13 +17,13 @@ namespace Confectionery_factory
     
     public partial class Кондитерская_фабрикаEntities1 : DbContext
     {
-        private static Кондитерская_фабрикаEntities1 _context;
+        public static Кондитерская_фабрикаEntities1 _context;
         public Кондитерская_фабрикаEntities1()
             : base("name=Кондитерская_фабрикаEntities1")
         {
         }
-    
         public static Кондитерская_фабрикаEntities1 GetContext()
+
         {
             if (_context == null)
                 _context = new Кондитерская_фабрикаEntities1();
@@ -42,6 +42,8 @@ namespace Confectionery_factory
         public virtual DbSet<Поставки_изделий> Поставки_изделий { get; set; }
         public virtual DbSet<Поставки_сырья> Поставки_сырья { get; set; }
         public virtual DbSet<Сырье> Сырье { get; set; }
+        public virtual DbSet<Пользователь> Пользователь { get; set; }
+        public virtual DbSet<Роли> Роли { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

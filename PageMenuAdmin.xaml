@@ -1,0 +1,15 @@
+﻿<Page x:Class="Confectionery_factory.PageMenuAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Confectionery_factory"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Аккаунт Администратора">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Content="Добавить менеджера"/>
+        <Button Margin="0 10 0 0" Content="Удалить менеджера"/>
+        <Button Name="btnExit" Click="btnExit_Click" Margin="0 10 0 0" Content="Выход"/>
+    </StackPanel>
+</Page>
