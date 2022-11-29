@@ -46,6 +46,7 @@
           <Property Name="Код_категории" Type="int" Nullable="false" />
           <Property Name="Наименование" Type="varchar" MaxLength="50" />
           <Property Name="Цена_шт" Type="float" />
+          <Property Name="Изображение" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Категории">
           <Key>
@@ -313,6 +314,7 @@
           <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Изделия" FromRole="Изделия" ToRole="Заказы" />
           <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Изделия" FromRole="Изделия" ToRole="Затраты" />
           <NavigationProperty Name="Категории" Relationship="Self.FK_Изделия_Категории" FromRole="Изделия" ToRole="Категории" />
+          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Категории">
           <Key>
@@ -590,6 +592,7 @@
           <EntitySetMapping Name="Изделия">
             <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Изделия">
               <MappingFragment StoreEntitySet="Изделия">
+                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
                 <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
                 <ScalarProperty Name="Код_категории" ColumnName="Код_категории" />
                 <ScalarProperty Name="Наименование" ColumnName="Наименование" />

@@ -24,7 +24,22 @@ namespace Confectionery_factory
         {
             InitializeComponent();
         }
-
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox.IsChecked.Value)
+            {
+                txbPassword.Text = psbPassword.Password;
+                txbPassword.Visibility = Visibility.Visible;
+                psbPassword.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                psbPassword.Password = txbPassword.Text; 
+                txbPassword.Visibility = Visibility.Hidden;
+                psbPassword.Visibility = Visibility.Visible; 
+            }
+        }
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -46,6 +61,11 @@ namespace Confectionery_factory
                         case 2: MessageBox.Show("Здравствуйте, Менеджер " + userObj.Имя + "!",
                             "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             Manager.MainFrame.Navigate(new Menu());
+                            break;
+                        case 3:
+                            MessageBox.Show("Здравствуйте, Заказчик " + userObj.Имя + "!",
+                        "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Manager.MainFrame.Navigate(new Cataloge());
                             break;
                         default: MessageBox.Show("Данные не обнаружены!",
                             "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);

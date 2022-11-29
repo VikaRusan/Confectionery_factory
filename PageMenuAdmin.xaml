@@ -6,10 +6,30 @@
       xmlns:local="clr-namespace:Confectionery_factory"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Аккаунт Администратора">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Content="Добавить менеджера"/>
-        <Button Margin="0 10 0 0" Content="Удалить менеджера"/>
-        <Button Name="btnExit" Click="btnExit_Click" Margin="0 10 0 0" Content="Выход"/>
-    </StackPanel>
+      Title="Аккаунт администратора"  IsVisibleChanged="Page_IsVisibleChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="377*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Список пользователей"></TextBlock>
+
+        <DataGrid x:Name="DGridUsers" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Имя}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Логин пользователя" Binding="{Binding Логин}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Роли.Имя}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Добавить" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click"/>
+        <Button Content="Удалить" Grid.Row="2" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click"></Button>
+    </Grid>
 </Page>

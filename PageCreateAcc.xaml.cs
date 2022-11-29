@@ -60,7 +60,7 @@ namespace Confectionery_factory
                     Логин = txbLogin.Text,
                     Имя = txbName.Text,
                     Пароль = txbPass.Text,
-                    Код_роли = 2
+                    Код_роли = 3
                 };
                 AppConnect.modelOdb.Пользователь.Add(userObj);
                 AppConnect.modelOdb.SaveChanges();

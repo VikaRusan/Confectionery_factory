@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Confectionery_factory
 {
@@ -27,6 +28,49 @@ namespace Confectionery_factory
             Manager.MainFrame = MainFrame;
             AppConnect.modelOdb = new Кондитерская_фабрикаEntities1();
             MainFrame.Navigate(new Authorization());
+            //ImportImages();
+        }
+        private void ImportImages()
+        {
+            var fileData = File.ReadAllLines(@"C:\Users\New\Практика\Desktop\изделия.txt");
+            var images = Directory.GetFiles(@"C:\Users\New\source\repos\Confectionery_factory\image");
+
+            foreach (var line in fileData)
+            {
+                var data = line.Split('\t');
+                var tempTour = new Изделия
+                {
+                    Наименование = data[1].Replace("\"", ""),
+                    Цена_шт = int.Parse(data[2]),
+                    Код_категории = int.Parse(data[0])
+                };
+                try
+                {
+                    tempTour.Изображение = File.ReadAllBytes(images.FirstOrDefault(p => p.Contains(tempTour.Наименование)));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                Кондитерская_фабрикаEntities1.GetContext().Изделия.Add(tempTour);
+                Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
+            }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Authorization());
+        }
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                BtnBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnBack.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
