@@ -16,8 +16,11 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Изделия"></TextBlock>
 
-        <DataGrid x:Name="DGridProducts" ItemsSource="{Binding КатегорииИзделийView}" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
+        <DataGrid x:Name="DGridProducts" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер заказа" Binding="{Binding Наименование}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Наименование изделия" Binding="{Binding Категории.Наименование}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Наименование покупателя" Binding="{Binding Цена_шт}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

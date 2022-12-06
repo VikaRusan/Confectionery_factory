@@ -27,20 +27,13 @@ namespace Confectionery_factory
             {
                 _currentProduct = selectedProduct;
             }
+
             InitializeComponent();
             DataContext = _currentProduct;
-            //DGridComposition.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Сырье.ToList();
-           // UpdateProductComposition();
+
+                var productComposition = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentProduct.Код_изделия).ToList();
+
+            DGridComposition.ItemsSource = productComposition;
         }
-       /* private void UpdateProductComposition()
-        {
-            var currentProduct = Кондитерская_фабрикаEntities1.GetContext().Сырье.ToList();
-            if (ComboComposition.SelectedIndex > 0)
-                currentProduct = currentProduct.Where(p => p.Изделия.Contains(ComboComposition.SelectedItem as Изделия)).ToList();
-        }
-        private void ComboComposition_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UpdateProductComposition();
-        }*/
     }
 }

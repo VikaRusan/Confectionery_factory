@@ -23,7 +23,7 @@ namespace Confectionery_factory
         public Products()
         {
             InitializeComponent();
-            //DGridProducts.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
+            DGridProducts.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
         }
         private void Btn_Click(object sender, RoutedEventArgs e)
         {

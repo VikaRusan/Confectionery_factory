@@ -19,7 +19,6 @@ namespace Confectionery_factory
         {
             this.Затраты = new HashSet<Затраты>();
             this.Поставки_сырья = new HashSet<Поставки_сырья>();
-            this.Изделия = new HashSet<Изделия>();
         }
     
         public int Код_сырья { get; set; }
@@ -32,7 +31,5 @@ namespace Confectionery_factory
         public virtual ICollection<Затраты> Затраты { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Поставки_сырья> Поставки_сырья { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Изделия> Изделия { get; set; }
     }
 }

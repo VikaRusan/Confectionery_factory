@@ -21,7 +21,7 @@
         </WrapPanel>
         <DataGrid AutoGenerateColumns="False" Name="DGridComposition" Grid.Row="1">
             <DataGrid.Columns>
-            <DataGridTextColumn Header="Сырье" Binding="{Binding Сырье.Вид}" Width="*"/>
+                <DataGridTextColumn Header="Сырье" Binding="{Binding Сырье.Вид}" Width="*"/>
                 <DataGridTextColumn Header="Цена/кг/шт" Binding="{Binding Сырье.Цена_кг_шт}"  Width="*"/>
                 <DataGridTextColumn Header="Фасовка" Binding="{Binding Сырье.Фасовка}"  Width="*"/>
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Сырье.Единица_измерения}" Width="*"/>

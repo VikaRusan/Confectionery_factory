@@ -38,7 +38,7 @@ namespace Confectionery_factory
         {
             var currentConfectionery = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
             if (ComboType.SelectedIndex > 0)
-                currentConfectionery = currentConfectionery.Where(p => p.Категории.Contains(ComboType.SelectedItem as Категории)).ToList();
+                currentConfectionery = currentConfectionery.Where(p => p.Затраты.Contains(ComboType.SelectedItem as Затраты)).ToList();
           
             currentConfectionery = currentConfectionery.Where(p => p.Наименование.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
             LViewTours.ItemsSource = currentConfectionery.OrderBy(p => p.Цена_шт).ToList();
