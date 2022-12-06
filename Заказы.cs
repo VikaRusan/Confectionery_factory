@@ -26,8 +26,8 @@ namespace Confectionery_factory
         public string ФИО_менеджера { get; set; }
         public System.DateTime Дата { get; set; }
         public int Количество_продукции { get; set; }
-        public Nullable<decimal> Стоимость { get; set; }
         public string Телефон_покупателя { get; set; }
+        public Nullable<decimal> Стоимость { get; set; }
         public string Статус { get; set; }
     
         public virtual Изделия Изделия { get; set; }

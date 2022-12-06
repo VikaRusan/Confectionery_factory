@@ -40,11 +40,11 @@ namespace Confectionery_factory
         public virtual DbSet<Затраты> Затраты { get; set; }
         public virtual DbSet<Изделия> Изделия { get; set; }
         public virtual DbSet<Категории> Категории { get; set; }
+        public virtual DbSet<Пользователь> Пользователь { get; set; }
         public virtual DbSet<Поставки_изделий> Поставки_изделий { get; set; }
         public virtual DbSet<Поставки_сырья> Поставки_сырья { get; set; }
-        public virtual DbSet<Сырье> Сырье { get; set; }
-        public virtual DbSet<Пользователь> Пользователь { get; set; }
         public virtual DbSet<Роли> Роли { get; set; }
+        public virtual DbSet<Сырье> Сырье { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

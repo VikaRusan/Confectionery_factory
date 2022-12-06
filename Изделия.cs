@@ -19,10 +19,11 @@ namespace Confectionery_factory
         {
             this.Заказы = new HashSet<Заказы>();
             this.Затраты = new HashSet<Затраты>();
+            this.Категории = new HashSet<Категории>();
+            this.Сырье = new HashSet<Сырье>();
         }
     
         public int Код_изделия { get; set; }
-        public int Код_категории { get; set; }
         public string Наименование { get; set; }
         public Nullable<double> Цена_шт { get; set; }
         public byte[] Изображение { get; set; }
@@ -31,6 +32,9 @@ namespace Confectionery_factory
         public virtual ICollection<Заказы> Заказы { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Затраты> Затраты { get; set; }
-        public virtual Категории Категории { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Категории> Категории { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Сырье> Сырье { get; set; }
     }
 }

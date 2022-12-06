@@ -18,7 +18,7 @@
 
         <DataGrid x:Name="DGridSupplyRawMaterials" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Наименование сырья" Binding="{Binding Сырье.Наименование}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Наименование сырья" Binding="{Binding Сырье.Вид}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО менеджера" Binding="{Binding ФИО_менеджера}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата поставки" Binding="{Binding Дата_поставки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество сырья" Binding="{Binding Количество_сырья}" Width="*"></DataGridTextColumn>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Кондитерская_фабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Кондитерская_фабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -43,7 +43,6 @@
             <PropertyRef Name="Код_изделия" />
           </Key>
           <Property Name="Код_изделия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Код_категории" Type="int" Nullable="false" />
           <Property Name="Наименование" Type="varchar" MaxLength="50" />
           <Property Name="Цена_шт" Type="float" />
           <Property Name="Изображение" Type="varbinary(max)" />
@@ -54,6 +53,14 @@
           </Key>
           <Property Name="Код_категории" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Наименование" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="КатегорииИзделий">
+          <Key>
+            <PropertyRef Name="Код_изделия" />
+            <PropertyRef Name="Код_категории" />
+          </Key>
+          <Property Name="Код_изделия" Type="int" Nullable="false" />
+          <Property Name="Код_категории" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Пользователь">
           <Key>
@@ -105,8 +112,34 @@
           </Key>
           <Property Name="Код_сырья" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Вид" Type="varchar" MaxLength="50" />
-          <Property Name="Цена" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Цена_кг_шт" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Фасовка" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
         </EntityType>
+        <EntityType Name="Сырье_по_изделиям">
+          <Key>
+            <PropertyRef Name="Код_изделия" />
+            <PropertyRef Name="Код_сырья" />
+          </Key>
+          <Property Name="Код_изделия" Type="int" Nullable="false" />
+          <Property Name="Код_сырья" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "Кондитерская_фабрика.dbo.КатегорииИзделийView" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="КатегорииИзделийView">
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+          <Property Name="Expr1" Type="varchar" MaxLength="50" />
+          <Property Name="Цена_шт" Type="float" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "Кондитерская_фабрика.dbo.СырьеПоИзделиямView" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="СырьеПоИзделиямView">
+          <Property Name="Вид" Type="varchar" MaxLength="50" />
+          <Property Name="Цена_кг_шт" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Фасовка" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+        </EntityType>-->
         <Association Name="FK_Заказы_Изделия">
           <End Role="Изделия" Type="Self.Изделия" Multiplicity="1" />
           <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
@@ -143,14 +176,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Изделия_Категории">
+        <Association Name="FK_КатегорииИзделий_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="1" />
+          <End Role="КатегорииИзделий" Type="Self.КатегорииИзделий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="КатегорииИзделий">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_КатегорииИзделий_Категории">
           <End Role="Категории" Type="Self.Категории" Multiplicity="1" />
-          <End Role="Изделия" Type="Self.Изделия" Multiplicity="*" />
+          <End Role="КатегорииИзделий" Type="Self.КатегорииИзделий" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Категории">
               <PropertyRef Name="Код_категории" />
             </Principal>
-            <Dependent Role="Изделия">
+            <Dependent Role="КатегорииИзделий">
               <PropertyRef Name="Код_категории" />
             </Dependent>
           </ReferentialConstraint>
@@ -187,6 +232,30 @@
               <PropertyRef Name="Код_сырья" />
             </Principal>
             <Dependent Role="Поставки_сырья">
+              <PropertyRef Name="Код_сырья" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сырье_по_изделиям_Изделия">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="1" />
+          <End Role="Сырье_по_изделиям" Type="Self.Сырье_по_изделиям" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Изделия">
+              <PropertyRef Name="Код_изделия" />
+            </Principal>
+            <Dependent Role="Сырье_по_изделиям">
+              <PropertyRef Name="Код_изделия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сырье_по_изделиям_Сырье">
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="1" />
+          <End Role="Сырье_по_изделиям" Type="Self.Сырье_по_изделиям" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сырье">
+              <PropertyRef Name="Код_сырья" />
+            </Principal>
+            <Dependent Role="Сырье_по_изделиям">
               <PropertyRef Name="Код_сырья" />
             </Dependent>
           </ReferentialConstraint>
@@ -228,11 +297,13 @@
           <EntitySet Name="Затраты" EntityType="Self.Затраты" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Изделия" EntityType="Self.Изделия" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Категории" EntityType="Self.Категории" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КатегорииИзделий" EntityType="Self.КатегорииИзделий" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Поставки_изделий" EntityType="Self.Поставки_изделий" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Поставки_сырья" EntityType="Self.Поставки_сырья" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Сырье" EntityType="Self.Сырье" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сырье_по_изделиям" EntityType="Self.Сырье_по_изделиям" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Заказы_Изделия" Association="Self.FK_Заказы_Изделия">
             <End Role="Изделия" EntitySet="Изделия" />
             <End Role="Заказы" EntitySet="Заказы" />
@@ -245,9 +316,13 @@
             <End Role="Сырье" EntitySet="Сырье" />
             <End Role="Затраты" EntitySet="Затраты" />
           </AssociationSet>
-          <AssociationSet Name="FK_Изделия_Категории" Association="Self.FK_Изделия_Категории">
-            <End Role="Категории" EntitySet="Категории" />
+          <AssociationSet Name="FK_КатегорииИзделий_Изделия" Association="Self.FK_КатегорииИзделий_Изделия">
             <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="КатегорииИзделий" EntitySet="КатегорииИзделий" />
+          </AssociationSet>
+          <AssociationSet Name="FK_КатегорииИзделий_Категории" Association="Self.FK_КатегорииИзделий_Категории">
+            <End Role="Категории" EntitySet="Категории" />
+            <End Role="КатегорииИзделий" EntitySet="КатегорииИзделий" />
           </AssociationSet>
           <AssociationSet Name="FK_Пользователь_Роли" Association="Self.FK_Пользователь_Роли">
             <End Role="Роли" EntitySet="Роли" />
@@ -261,8 +336,17 @@
             <End Role="Сырье" EntitySet="Сырье" />
             <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
           </AssociationSet>
+          <AssociationSet Name="FK_Сырье_по_изделиям_Изделия" Association="Self.FK_Сырье_по_изделиям_Изделия">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Сырье_по_изделиям" EntitySet="Сырье_по_изделиям" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сырье_по_изделиям_Сырье" Association="Self.FK_Сырье_по_изделиям_Сырье">
+            <End Role="Сырье" EntitySet="Сырье" />
+            <End Role="Сырье_по_изделиям" EntitySet="Сырье_по_изделиям" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Кондитерская_фабрикаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -286,8 +370,8 @@
           <Property Name="ФИО_менеджера" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Количество_продукции" Type="Int32" Nullable="false" />
-          <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Изделия" Relationship="Self.FK_Заказы_Изделия" FromRole="Заказы" ToRole="Изделия" />
           <NavigationProperty Name="Поставки_изделий" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Заказы" ToRole="Поставки_изделий" />
@@ -308,13 +392,13 @@
             <PropertyRef Name="Код_изделия" />
           </Key>
           <Property Name="Код_изделия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Код_категории" Type="Int32" Nullable="false" />
           <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Цена_шт" Type="Double" />
+          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Изделия" FromRole="Изделия" ToRole="Заказы" />
           <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Изделия" FromRole="Изделия" ToRole="Затраты" />
-          <NavigationProperty Name="Категории" Relationship="Self.FK_Изделия_Категории" FromRole="Изделия" ToRole="Категории" />
-          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Категории" Relationship="Self.КатегорииИзделий" FromRole="Изделия" ToRole="Категории" />
+          <NavigationProperty Name="Сырье" Relationship="Self.Сырье_по_изделиям" FromRole="Изделия" ToRole="Сырье" />
         </EntityType>
         <EntityType Name="Категории">
           <Key>
@@ -322,7 +406,18 @@
           </Key>
           <Property Name="Код_категории" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Изделия" Relationship="Self.FK_Изделия_Категории" FromRole="Категории" ToRole="Изделия" />
+          <NavigationProperty Name="Изделия" Relationship="Self.КатегорииИзделий" FromRole="Категории" ToRole="Изделия" />
+        </EntityType>
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код_роли" Type="Int32" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Роли" Relationship="Self.FK_Пользователь_Роли" FromRole="Пользователь" ToRole="Роли" />
         </EntityType>
         <EntityType Name="Поставки_изделий">
           <Key>
@@ -353,15 +448,26 @@
           <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Сырье" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Поставки_сырья" ToRole="Сырье" />
         </EntityType>
+        <EntityType Name="Роли">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пользователь" Relationship="Self.FK_Пользователь_Роли" FromRole="Роли" ToRole="Пользователь" />
+        </EntityType>
         <EntityType Name="Сырье">
           <Key>
             <PropertyRef Name="Код_сырья" />
           </Key>
           <Property Name="Код_сырья" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Вид" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Цена" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Цена_кг_шт" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Фасовка" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Сырье" FromRole="Сырье" ToRole="Затраты" />
           <NavigationProperty Name="Поставки_сырья" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Сырье" ToRole="Поставки_сырья" />
+          <NavigationProperty Name="Изделия" Relationship="Self.Сырье_по_изделиям" FromRole="Сырье" ToRole="Изделия" />
         </EntityType>
         <Association Name="FK_Заказы_Изделия">
           <End Role="Изделия" Type="Self.Изделия" Multiplicity="1" />
@@ -411,15 +517,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Изделия_Категории">
-          <End Role="Категории" Type="Self.Категории" Multiplicity="1" />
-          <End Role="Изделия" Type="Self.Изделия" Multiplicity="*" />
+        <Association Name="FK_Пользователь_Роли">
+          <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Категории">
-              <PropertyRef Name="Код_категории" />
+            <Principal Role="Роли">
+              <PropertyRef Name="Код" />
             </Principal>
-            <Dependent Role="Изделия">
-              <PropertyRef Name="Код_категории" />
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="Код_роли" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -435,14 +541,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Кондитерская_фабрикаEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="КатегорииИзделий">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="*" />
+          <End Role="Категории" Type="Self.Категории" Multiplicity="*" />
+        </Association>
+        <Association Name="Сырье_по_изделиям">
+          <End Role="Изделия" Type="Self.Изделия" Multiplicity="*" />
+          <End Role="Сырье" Type="Self.Сырье" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Заказы" EntityType="Self.Заказы" />
           <EntitySet Name="Затраты" EntityType="Self.Затраты" />
           <EntitySet Name="Изделия" EntityType="Self.Изделия" />
           <EntitySet Name="Категории" EntityType="Self.Категории" />
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" />
           <EntitySet Name="Поставки_изделий" EntityType="Self.Поставки_изделий" />
           <EntitySet Name="Поставки_сырья" EntityType="Self.Поставки_сырья" />
+          <EntitySet Name="Роли" EntityType="Self.Роли" />
           <EntitySet Name="Сырье" EntityType="Self.Сырье" />
           <AssociationSet Name="FK_Заказы_Изделия" Association="Self.FK_Заказы_Изделия">
             <End Role="Изделия" EntitySet="Изделия" />
@@ -460,13 +576,21 @@
             <End Role="Сырье" EntitySet="Сырье" />
             <End Role="Затраты" EntitySet="Затраты" />
           </AssociationSet>
-          <AssociationSet Name="FK_Изделия_Категории" Association="Self.FK_Изделия_Категории">
-            <End Role="Категории" EntitySet="Категории" />
-            <End Role="Изделия" EntitySet="Изделия" />
+          <AssociationSet Name="FK_Пользователь_Роли" Association="Self.FK_Пользователь_Роли">
+            <End Role="Роли" EntitySet="Роли" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
           </AssociationSet>
           <AssociationSet Name="FK_Поставки_сырья_Сырье" Association="Self.FK_Поставки_сырья_Сырье">
             <End Role="Сырье" EntitySet="Сырье" />
             <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
+          </AssociationSet>
+          <AssociationSet Name="КатегорииИзделий" Association="Self.КатегорииИзделий">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Категории" EntitySet="Категории" />
+          </AssociationSet>
+          <AssociationSet Name="Сырье_по_изделиям" Association="Self.Сырье_по_изделиям">
+            <End Role="Изделия" EntitySet="Изделия" />
+            <End Role="Сырье" EntitySet="Сырье" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -498,12 +622,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="Пользователь" EntityType="Кондитерская_фабрикаModel.Пользователь" />
-          <EntitySet Name="Роли" EntityType="Кондитерская_фабрикаModel.Роли" />
-          <AssociationSet Name="FK_Пользователь_Роли" Association="Кондитерская_фабрикаModel.FK_Пользователь_Роли">
-            <End Role="Роли" EntitySet="Роли" />
-            <End Role="Пользователь" EntitySet="Пользователь" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -516,43 +634,12 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Пользователь">
-          <Key>
-            <PropertyRef Name="Код" />
-          </Key>
-          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Логин" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Пароль" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Код_роли" Type="Int32" Nullable="false" />
-          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Роли" Relationship="Кондитерская_фабрикаModel.FK_Пользователь_Роли" FromRole="Пользователь" ToRole="Роли" />
-        </EntityType>
-        <EntityType Name="Роли">
-          <Key>
-            <PropertyRef Name="Код" />
-          </Key>
-          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Пользователь" Relationship="Кондитерская_фабрикаModel.FK_Пользователь_Роли" FromRole="Роли" ToRole="Пользователь" />
-        </EntityType>
-        <Association Name="FK_Пользователь_Роли">
-          <End Type="Кондитерская_фабрикаModel.Роли" Role="Роли" Multiplicity="1" />
-          <End Type="Кондитерская_фабрикаModel.Пользователь" Role="Пользователь" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Роли">
-              <PropertyRef Name="Код" />
-            </Principal>
-            <Dependent Role="Пользователь">
-              <PropertyRef Name="Код_роли" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Кондитерская_фабрикаModelContainer" CdmEntityContainer="Кондитерская_фабрикаEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Кондитерская_фабрикаModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -573,8 +660,8 @@
                 <ScalarProperty Name="ФИО_менеджера" ColumnName="ФИО_менеджера" />
                 <ScalarProperty Name="Дата" ColumnName="Дата" />
                 <ScalarProperty Name="Количество_продукции" ColumnName="Количество_продукции" />
-                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
                 <ScalarProperty Name="Телефон_покупателя" ColumnName="Телефон_покупателя" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
                 <ScalarProperty Name="Статус" ColumnName="Статус" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -592,11 +679,10 @@
           <EntitySetMapping Name="Изделия">
             <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Изделия">
               <MappingFragment StoreEntitySet="Изделия">
-                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
                 <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
-                <ScalarProperty Name="Код_категории" ColumnName="Код_категории" />
                 <ScalarProperty Name="Наименование" ColumnName="Наименование" />
                 <ScalarProperty Name="Цена_шт" ColumnName="Цена_шт" />
+                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -605,6 +691,17 @@
               <MappingFragment StoreEntitySet="Категории">
                 <ScalarProperty Name="Код_категории" ColumnName="Код_категории" />
                 <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователь">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Пользователь">
+              <MappingFragment StoreEntitySet="Пользователь">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Код_роли" ColumnName="Код_роли" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -637,15 +734,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Роли">
+            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Роли">
+              <MappingFragment StoreEntitySet="Роли">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Сырье">
             <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Сырье">
               <MappingFragment StoreEntitySet="Сырье">
                 <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
                 <ScalarProperty Name="Вид" ColumnName="Вид" />
-                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Цена_кг_шт" ColumnName="Цена_кг_шт" />
+                <ScalarProperty Name="Фасовка" ColumnName="Фасовка" />
+                <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="КатегорииИзделий" TypeName="Кондитерская_фабрикаModel.КатегорииИзделий" StoreEntitySet="КатегорииИзделий">
+            <EndProperty Name="Изделия">
+              <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
+            </EndProperty>
+            <EndProperty Name="Категории">
+              <ScalarProperty Name="Код_категории" ColumnName="Код_категории" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Сырье_по_изделиям" TypeName="Кондитерская_фабрикаModel.Сырье_по_изделиям" StoreEntitySet="Сырье_по_изделиям">
+            <EndProperty Name="Изделия">
+              <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
+            </EndProperty>
+            <EndProperty Name="Сырье">
+              <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_dropdiagram" />
@@ -670,25 +793,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Кондитерская_фабрикаModel.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Пользователь">
-            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Пользователь">
-              <MappingFragment StoreEntitySet="Пользователь">
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Код_роли" ColumnName="Код_роли" />
-                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
-                <ScalarProperty Name="Логин" ColumnName="Логин" />
-                <ScalarProperty Name="Код" ColumnName="Код" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Роли">
-            <EntityTypeMapping TypeName="Кондитерская_фабрикаModel.Роли">
-              <MappingFragment StoreEntitySet="Роли">
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Код" ColumnName="Код" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -27,7 +27,8 @@ namespace Confectionery_factory
             InitializeComponent();
             Manager.MainFrame = MainFrame;
             AppConnect.modelOdb = new Кондитерская_фабрикаEntities1();
-            MainFrame.Navigate(new Authorization());
+            MainFrame.Navigate(new Menu());
+            //MainFrame.Navigate(new Authorization());
             //ImportImages();
         }
         private void ImportImages()
@@ -42,7 +43,6 @@ namespace Confectionery_factory
                 {
                     Наименование = data[1].Replace("\"", ""),
                     Цена_шт = int.Parse(data[2]),
-                    Код_категории = int.Parse(data[0])
                 };
                 try
                 {

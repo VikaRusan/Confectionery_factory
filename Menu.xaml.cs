@@ -25,6 +25,10 @@ namespace Confectionery_factory
             Manager.MainFrameMenu = MainFrameMenu;
             InitializeComponent();
         }
+        private void Products_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrameMenu.Navigate(new Products());
+        }
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             MainFrameMenu.Navigate(new Orders());

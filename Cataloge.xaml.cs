@@ -23,29 +23,33 @@ namespace Confectionery_factory
         public Cataloge()
         {
             InitializeComponent();
-
-            var currentTours = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
-            LViewTours.ItemsSource = currentTours;
+            var allTypes = Кондитерская_фабрикаEntities1.GetContext().Категории.ToList();
+            allTypes.Insert(0, new Категории
+            {
+                Наименование = "Все категории"
+            });
+            ComboType.ItemsSource = allTypes;
+            ComboType.SelectedIndex = 0;
+            UpdateCataloge();
+            var currentConfectionery = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
+            LViewTours.ItemsSource = currentConfectionery;
         }
-        private void UpdateTours()
+        private void UpdateCataloge()
         {
-            var currentTours = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
-
-            currentTours = currentTours.Where(p => p.Наименование.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
-
+            var currentConfectionery = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
+            if (ComboType.SelectedIndex > 0)
+                currentConfectionery = currentConfectionery.Where(p => p.Категории.Contains(ComboType.SelectedItem as Категории)).ToList();
+          
+            currentConfectionery = currentConfectionery.Where(p => p.Наименование.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            LViewTours.ItemsSource = currentConfectionery.OrderBy(p => p.Цена_шт).ToList();
         }
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateTours();
+            UpdateCataloge();
         }
         private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateTours();
-        }
-
-        private void CheckActual_Checked(object sender, RoutedEventArgs e)
-        {
-            UpdateTours();
+            UpdateCataloge();
         }
     }
 }

@@ -14,6 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row ="0" Height="30" VerticalAlignment="Top" FontSize="18" Background="#FDF4E3">
+            <MenuItem x:Name="Products" Header="Изделия" Click="Products_Click" ></MenuItem>
             <MenuItem x:Name="Orders" Header="Заказы" Click="Orders_Click" ></MenuItem>
             <MenuItem x:Name="SupplyRawMaterials" Header="Поставки сырья" Click="SupplyRawMaterials_Click"></MenuItem>
             <MenuItem x:Name="Supply" Header="Поставки изделий"></MenuItem>

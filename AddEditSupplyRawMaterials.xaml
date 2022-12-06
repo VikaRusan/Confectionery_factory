@@ -33,7 +33,7 @@
         <TextBlock Text="Телефон поставщика" Grid.Row="6" ></TextBlock>
         <TextBlock Text="Адрес поставщика" Grid.Row="7" ></TextBlock>
 
-        <ComboBox SelectedItem="{Binding Сырье}" Grid.Row="1" Grid.Column="1" x:Name="ComboRawMaterials" DisplayMemberPath="Наименование" />
+        <ComboBox SelectedItem="{Binding Сырье}" Grid.Row="1" Grid.Column="1" x:Name="ComboRawMaterials" DisplayMemberPath="Вид" />
         <TextBox Text="{Binding ФИО_менеджера}" Grid.Column="1" Grid.Row="2"></TextBox>
         <TextBox  Text="{Binding Количество_сырья}" Grid.Column="1" Grid.Row="3"></TextBox>
         <TextBox Text="{Binding Дата_поставки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Grid.Column="1" Grid.Row="4"></TextBox>
