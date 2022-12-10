@@ -18,9 +18,9 @@
 
         <DataGrid x:Name="DGridProducts" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер заказа" Binding="{Binding Наименование}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Наименование изделия" Binding="{Binding Категории.Наименование}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Наименование покупателя" Binding="{Binding Цена_шт}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер изделия" Binding="{Binding Наименование}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Категории.Наименование}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Цена_шт}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

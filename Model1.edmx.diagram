@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e9347de853ac4bcf93fd74bed4332292" Name="Diagram1">
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Заказы" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Затраты" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Изделия" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Категории" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Пользователь" Width="1.5" PointX="8" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Поставки_изделий" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Поставки_сырья" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Роли" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Кондитерская_фабрикаModel.Сырье" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Заказы_Изделия" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Поставки_изделий_Заказы" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Затраты_Изделия" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Затраты_Сырье" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Изделия_Категории" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Пользователь_Роли" ManuallyRouted="false" />
-        <AssociationConnector Association="Кондитерская_фабрикаModel.FK_Поставки_сырья_Сырье" ManuallyRouted="false" />
+      <Diagram DiagramId="733c9dab6fce480aa71e8e674b9e287a" Name="Diagram1">
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Заказы" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Затраты" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Изделия" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Категории" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Пользователь" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Поставки_изделий" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Поставки_сырья" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Роли" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Сырье" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Заказы_Изделия" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Поставки_изделий_Заказы" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Затраты_Изделия" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Затраты_Сырье" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Изделия_Категории" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Пользователь_Роли" ManuallyRouted="false" />
+        <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Поставки_сырья_Сырье" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

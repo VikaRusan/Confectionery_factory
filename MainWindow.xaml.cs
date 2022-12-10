@@ -34,15 +34,16 @@ namespace Confectionery_factory
         private void ImportImages()
         {
             var fileData = File.ReadAllLines(@"C:\Users\New\Практика\Desktop\изделия.txt");
-            var images = Directory.GetFiles(@"C:\Users\New\source\repos\Confectionery_factory\image");
+            var images = Directory.GetFiles(@"C:\Users\New\source\repos\VikaRusan\Confectionery_factory\image");
 
             foreach (var line in fileData)
             {
                 var data = line.Split('\t');
                 var tempTour = new Изделия
                 {
+                    Код_категории = int.Parse(data[0]),
                     Наименование = data[1].Replace("\"", ""),
-                    Цена_шт = int.Parse(data[2]),
+                    Цена_шт = int.Parse(data[2])
                 };
                 try
                 {
@@ -57,9 +58,13 @@ namespace Confectionery_factory
             }
         }
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new Authorization());
+        }
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.GoBack();
         }
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {

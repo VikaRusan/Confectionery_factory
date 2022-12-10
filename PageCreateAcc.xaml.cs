@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Confectionery_factory
 {
     /// <summary>
@@ -31,7 +32,7 @@ namespace Confectionery_factory
         }
         private void PasswordBox_PasswordChanged (object sender, RoutedEventArgs e)
         {
-            if(psbPass.Password != txbPass.Text)
+            if (psbPass.Password != txbPass.Text)
             {
                 btnCreate.IsEnabled = false;
                 psbPass.Background = Brushes.LightCoral;
@@ -47,25 +48,56 @@ namespace Confectionery_factory
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            if(AppConnect.modelOdb.Пользователь.Count(x => x.Логин == txbLogin.Text) > 0)
+
+            if (AppConnect.modelOdb.Пользователь.Count(x => x.Логин == txbLogin.Text) > 0)
             {
-                MessageBox.Show("Пользователь с таким логином есть!", "Уведомление",
+                    MessageBox.Show("Пользователь с таким логином есть!", "Уведомление",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+            if (psbPass.Password == null)
+            {
+                message.Text = "Пароль был пуст";
+                psbPass.Password = null;
+                txbPass.Text = "";
+                psbPass.Background = Brushes.White;
+                return;
+            }
+
+            if (psbPass.Password.Length < 2)
+            {
+                message.Text = "Длина пароля должна быть больше, чем 1";
+                psbPass.Password = null;
+                txbPass.Text = "";
+                psbPass.Background = Brushes.White;
+                return;
+            }
+
+            if (psbPass.Password.Length < 8)
+            {
+                message.Text = "Длина пароля должна быть не меньше, чем 8";
+                psbPass.Password = null;
+                txbPass.Text = "";
+                psbPass.Background = Brushes.White;
+                return;
+            }
+                
             try
             {
+                var password = txbPass.Text;
                 Пользователь userObj = new Пользователь()
                 {
                     Логин = txbLogin.Text,
                     Имя = txbName.Text,
-                    Пароль = txbPass.Text,
+                    Пароль = md5.HashPassword(password),
                     Код_роли = 3
                 };
                 AppConnect.modelOdb.Пользователь.Add(userObj);
                 AppConnect.modelOdb.SaveChanges();
                 MessageBox.Show("Данные успешно добавлены!", "Уведомление",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+                Manager.MainFrame.GoBack();
             }
             catch
             {

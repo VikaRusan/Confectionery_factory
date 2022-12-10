@@ -10,22 +10,33 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="377*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Наименование, StringFormat={}Изделие: {0:N2}}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" TextAlignment="Right"></TextBlock>
-                </StackPanel>
-        </WrapPanel>
-        <DataGrid AutoGenerateColumns="False" Name="DGridComposition" Grid.Row="1">
+                <TextBlock Grid.Row="0" Text="{Binding Наименование, StringFormat={}Изделие: {0:N2}}" HorizontalAlignment="Left" FontWeight="Bold" FontSize="16" TextAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="1" Name ="summ" Text="" FontWeight="Bold" FontSize="16" HorizontalAlignment="left" TextAlignment="Right"></TextBlock>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DGridComposition" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Сырье" Binding="{Binding Сырье.Вид}" Width="*"/>
-                <DataGridTextColumn Header="Цена/кг/шт" Binding="{Binding Сырье.Цена_кг_шт}"  Width="*"/>
-                <DataGridTextColumn Header="Фасовка" Binding="{Binding Сырье.Фасовка}"  Width="*"/>
+                <DataGridTextColumn Header="Цена за единицу измерения" Binding="{Binding Сырье.Цена_ед_изм}"  Width="*"/>
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Сырье.Единица_измерения}" Width="*"/>
+                <DataGridTextColumn Header="Требуется сырья" Binding="{Binding Объем_затрат}"  Width="*"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}"  Width="*"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Добавить" Grid.Row="3" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click" />
+        <Button Content="Диаграмма состава" Grid.Row="3" HorizontalAlignment="Center" Name="BtnVisualization" Width="175" Click="BtnVisualization_Click" />
+        <Button Content="Удалить" Grid.Row="3" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click" ></Button>
+
     </Grid>
 </Page>

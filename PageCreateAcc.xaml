@@ -16,6 +16,7 @@
         <TextBlock FontSize="18" Foreground="#B15124" Text="Введите пароль:"/>
         <TextBox Name="txbPass" FontSize="18" Width="250"/>
         <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Name="psbPass" Margin="0 10 0 0" FontSize="18" Width="250"/>
+        <TextBlock FontSize="12" Foreground="Red" HorizontalAlignment="Center" Text="" Name="message"></TextBlock>
         <Grid>
             <Button Name="btnCreate" FontSize="18" FontWeight="Bold" Foreground="#B15124" Background="#FCD778" Margin="0 10 0 0" HorizontalAlignment="Left" Width="150" Content="Создать" IsEnabled="False" Click="btnCreate_Click" />
             <Button FontSize="18" FontWeight="Bold" Foreground="#B15124" Background="#FCD778" Margin="0 10 0 0" HorizontalAlignment="Right" Width="150"  Content="Назад" Click="Button_Click"/>

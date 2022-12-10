@@ -23,8 +23,7 @@ namespace Confectionery_factory
     
         public int Код_сырья { get; set; }
         public string Вид { get; set; }
-        public Nullable<decimal> Цена_кг_шт { get; set; }
-        public Nullable<decimal> Фасовка { get; set; }
+        public Nullable<decimal> Цена_ед_изм { get; set; }
         public string Единица_измерения { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -10,18 +10,10 @@
 namespace Confectionery_factory
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Затраты
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int Код_затрат { get; set; }
-        public int Код_изделия { get; set; }
-        public int Код_сырья { get; set; }
-        public Nullable<double> Объем_затрат { get; set; }
-        public string Единица_измерения { get; set; }
-        public Nullable<decimal> Стоимость { get; set; }
-    
-        public virtual Изделия Изделия { get; set; }
-        public virtual Сырье Сырье { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

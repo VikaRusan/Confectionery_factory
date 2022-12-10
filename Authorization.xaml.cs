@@ -44,7 +44,8 @@ namespace Confectionery_factory
         {
             try
             {
-                var userObj = AppConnect.modelOdb.Пользователь.FirstOrDefault(x => x.Логин == txbLogin.Text && x.Пароль == psbPassword.Password);
+                var password = md5.HashPassword(psbPassword.Password);
+                var userObj = AppConnect.modelOdb.Пользователь.FirstOrDefault(x => x.Логин == txbLogin.Text && x.Пароль == password);
                 if (userObj == null)
                 {
                     MessageBox.Show("Такого пользователя нет!", "Ошибка авторизации",

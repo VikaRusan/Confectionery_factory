@@ -1,4 +1,4 @@
-﻿<Page x:Class="Confectionery_factory.EditUser"
+﻿<Page x:Class="Confectionery_factory.AddEditProductComposition"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Confectionery_factory"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Редактирование пользователя">
+      Title="">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,13 +19,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Имя пользователя" Grid.Row="0" />
-        <TextBlock Text="Логин пользователя" Grid.Row="1" ></TextBlock>
-        <TextBlock Text="Роль" Grid.Row="2"></TextBlock>
-        <TextBox Text="{Binding Имя}" Grid.Column="1" Grid.Row="0"></TextBox>
-        <TextBox Text="{Binding Логин}" Grid.Column="1" Grid.Row="1"></TextBox>
-        <ComboBox SelectedItem="{Binding Роли}" Grid.Row="2" Grid.Column="1" x:Name="ComboRoles" DisplayMemberPath="Имя" />
-
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Состав изделия"/>
+        <TextBlock Text="Сырье" Grid.Row="1" />
+        <TextBlock Text="Сколько требуется сырья" Grid.Row="2" ></TextBlock>
+        <ComboBox SelectedItem="{Binding Сырье}" Grid.Row="1" Grid.Column="1" x:Name="ComboComposition" DisplayMemberPath="Вид" />
+        <TextBox Text="{Binding Объем_затрат}" Grid.Column="2" Grid.Row="2"></TextBox>
         <Button Content="Сохранить" Grid.ColumnSpan="2" Grid.Row="3" Name="BtnSave" Click="BtnSave_Click"></Button>
     </Grid>
 </Page>
