@@ -24,7 +24,7 @@ namespace Confectionery_factory
         public int Код_изделия { get; set; }
         public int Код_категории { get; set; }
         public string Наименование { get; set; }
-        public Nullable<double> Цена_шт { get; set; }
+        public Nullable<decimal> Цена_шт { get; set; }
         public byte[] Изображение { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

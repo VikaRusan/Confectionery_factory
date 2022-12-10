@@ -4,6 +4,36 @@
              xmlns:local="clr-namespace:Confectionery_factory"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="buttonWithContent" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+            <Setter Property="Background" Value="#FFA000"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="1" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFA000"/>
+                    <Setter Property="Foreground" Value="#efefef"/>
+                </Trigger>
+
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#FFA000"/>
+                    <Setter Property="Foreground" Value="#efefef"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

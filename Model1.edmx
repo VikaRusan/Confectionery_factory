@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище КондитерскаяФабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище КондитерскаяФабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -47,7 +47,7 @@
           <Property Name="Код_изделия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Код_категории" Type="int" Nullable="false" />
           <Property Name="Наименование" Type="varchar" MaxLength="50" />
-          <Property Name="Цена_шт" Type="float" />
+          <Property Name="Цена_шт" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Изображение" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Категории">
@@ -265,8 +265,7 @@
             <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="КондитерскаяФабрикаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -316,7 +315,7 @@
           <Property Name="Код_изделия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Код_категории" Type="Int32" Nullable="false" />
           <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Цена_шт" Type="Double" />
+          <Property Name="Цена_шт" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Изделия" FromRole="Изделия" ToRole="Заказы" />
           <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Изделия" FromRole="Изделия" ToRole="Затраты" />

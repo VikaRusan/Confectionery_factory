@@ -4,16 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Confectionery_factory"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Состав изделия">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="377*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="{Binding Наименование, StringFormat={}Изделие: {0:N2}}" HorizontalAlignment="Left" FontWeight="Bold" FontSize="16" TextAlignment="Right"></TextBlock>
@@ -34,9 +37,22 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Добавить" Grid.Row="3" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click" />
-        <Button Content="Диаграмма состава" Grid.Row="3" HorizontalAlignment="Center" Name="BtnVisualization" Width="175" Click="BtnVisualization_Click" />
-        <Button Content="Удалить" Grid.Row="3" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click" ></Button>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock  Text="Тип диаграммы: "  Margin="5" Width="125" VerticalAlignment="Center"></TextBlock>
+            <ComboBox SelectionChanged="UpdateChart"
+                Name="ComboChart" SelectedItem="0" Margin="5" Width="175"></ComboBox>
+        </StackPanel>
+        <WindowsFormsHost Grid.Row="4" Margin="5">
+            <charts:Chart x:Name="ChartComposition">
+                <charts:Chart.Legends>
+                    <charts:Legend>
+
+                    </charts:Legend>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
+        <Button  Content="Добавить" Grid.Row="5" HorizontalAlignment="Left" Height="25" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click" VerticalAlignment="Bottom" />
+        <Button  Content="Удалить" Grid.Row="5" HorizontalAlignment="Right" Height="25" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click" VerticalAlignment="Bottom" ></Button>
 
     </Grid>
 </Page>
