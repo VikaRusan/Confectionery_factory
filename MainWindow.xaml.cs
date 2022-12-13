@@ -29,6 +29,7 @@ namespace Confectionery_factory
             AppConnect.modelOdb = new Кондитерская_фабрикаEntities1();
             MainFrame.Navigate(new Menu());
             //MainFrame.Navigate(new Authorization());
+            //MainFrame.Navigate(new Cataloge());
             //ImportImages();
         }
         private void ImportImages()

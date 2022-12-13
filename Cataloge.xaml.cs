@@ -20,6 +20,8 @@ namespace Confectionery_factory
     /// </summary>
     public partial class Cataloge : Page
     {
+        public int k = 0;
+       
         public Cataloge()
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace Confectionery_factory
             UpdateCataloge();
             var currentConfectionery = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
             LViewTours.ItemsSource = currentConfectionery;
+            
         }
         private void UpdateCataloge()
         {
@@ -50,6 +53,33 @@ namespace Confectionery_factory
         private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateCataloge();
+        }
+
+        private void btnComposition_Click(object sender, RoutedEventArgs e)
+        {
+            ProductComposition page = new ProductComposition((sender as Button).DataContext as Изделия);
+            page.BtnAddComposition.Visibility = Visibility.Hidden;
+            page.BtnAddComposition.IsEnabled = false;
+            page.BtnDeleteComposition.Visibility = Visibility.Hidden;
+            page.BtnDeleteComposition.IsEnabled = false;
+            page.DGridTemp.Visibility = Visibility.Hidden;
+            Manager.MainFrame.Navigate(page);
+
+        }
+        private void btnAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            btn.Visibility = Visibility.Hidden;
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+
+        }
+        private void btnMinus_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+
         }
     }
 }

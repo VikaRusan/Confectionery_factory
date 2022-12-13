@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Confectionery_factory
@@ -52,11 +42,11 @@ namespace Confectionery_factory
             ComboChart.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
 
         }
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAddComposition_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddEditProductComposition(null));
         }
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        private void BtnEditComposition_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddEditProductComposition((sender as Button).DataContext as Затраты));
         }
@@ -71,13 +61,14 @@ namespace Confectionery_factory
                 var compositionList = _context.Сырье.ToList();
                 foreach (var composition in compositionList)
                 {
-                    currentSeries.Points.AddXY(composition.Вид,
+                    currentSeries.Points.AddXY(
+                        composition.Вид,
                         _context.Затраты.ToList().Where(p => p.Код_изделия == _currentProduct.Код_изделия
                         && p.Код_сырья == composition.Код_сырья).Sum(p => p.Объем_затрат));
                 }
             }
         }
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnDeleteComposition_Click(object sender, RoutedEventArgs e)
         {
             var compositionForRemoving = DGridComposition.SelectedItems.Cast<Затраты>().ToList();
 

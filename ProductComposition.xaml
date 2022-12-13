@@ -25,13 +25,13 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Сырье" Binding="{Binding Сырье.Вид}" Width="*"/>
                 <DataGridTextColumn Header="Цена за единицу измерения" Binding="{Binding Сырье.Цена_ед_изм}"  Width="*"/>
-                <DataGridTextColumn Header="Единица измерения" Binding="{Binding Сырье.Единица_измерения}" Width="*"/>
                 <DataGridTextColumn Header="Требуется сырья" Binding="{Binding Объем_затрат}"  Width="*"/>
+                <DataGridTextColumn Header="Единица измерения" Binding="{Binding Сырье.Единица_измерения}" Width="*"/>
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}"  Width="*"/>
-                <DataGridTemplateColumn Width="auto">
+                <DataGridTemplateColumn Width="auto" Visibility="Visible" x:Name="DGridTemp"> 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                            <Button Content="Редактировать" x:Name="BtnEditComposition" Click="BtnEditComposition_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -51,8 +51,8 @@
                 </charts:Chart.Legends>
             </charts:Chart>
         </WindowsFormsHost>
-        <Button  Content="Добавить" Grid.Row="5" HorizontalAlignment="Left" Height="25" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click" VerticalAlignment="Bottom" />
-        <Button  Content="Удалить" Grid.Row="5" HorizontalAlignment="Right" Height="25" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click" VerticalAlignment="Bottom" ></Button>
+        <Button  Content="Добавить" Grid.Row="5" HorizontalAlignment="Left" Height="25" x:Name="BtnAddComposition" Margin="10,10,0,10" Width="175" Click="BtnAddComposition_Click" VerticalAlignment="Bottom" />
+        <Button  Content="Удалить" Grid.Row="5" HorizontalAlignment="Right" Height="25" x:Name="BtnDeleteComposition" Margin="10,10,10,10" Width="175" Click="BtnDeleteComposition_Click" VerticalAlignment="Bottom" ></Button>
 
     </Grid>
 </Page>

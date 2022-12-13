@@ -31,13 +31,14 @@
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Style ="{StaticResource buttonWithContent}" Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Style ="{StaticResource buttonWithContent}" Content="Добавить" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click"/>
-        <Button Style ="{StaticResource buttonWithContent}" Content="Удалить" Grid.Row="2" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click"></Button>
+        <Button  Content="Добавить" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Margin="10,10,0,10" Width="175" Click="BtnAdd_Click"/>
+        <Button  Content="Статистика заказов" Grid.Row="2" HorizontalAlignment="Center" Name="BtnStat" Margin="10,10,0,10" Width="175" Click="BtnStat_Click"/>
+        <Button  Content="Удалить" Grid.Row="2" HorizontalAlignment="Right" Name="BtnDelete" Margin="10,10,10,10" Width="175" Click="BtnDelete_Click"></Button>
     </Grid>
 </Page>
