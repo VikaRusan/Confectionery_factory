@@ -18,12 +18,17 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Состав изделия"/>
         <TextBlock Text="Сырье" Grid.Row="1" />
         <TextBlock Text="Сколько требуется сырья" Grid.Row="2" ></TextBlock>
-        <ComboBox SelectedItem="{Binding Сырье}" Grid.Row="1" Grid.Column="1" x:Name="ComboComposition" DisplayMemberPath="Вид" />
-        <TextBox Text="{Binding Объем_затрат}" Grid.Column="2" Grid.Row="2"></TextBox>
-        <Button Content="Сохранить" Grid.ColumnSpan="2" Grid.Row="3" Name="BtnSave" Click="BtnSave_Click"></Button>
+        <TextBlock Text="Количество на складе" Grid.Row="3"/>
+        <TextBlock Text="{Binding Сырье.Единица_измерения, StringFormat={}Единица измерения: {0:N2}}" Grid.Row="3" VerticalAlignment="Center"/>
+        <ComboBox SelectedItem="{Binding Сырье}" Grid.Row="1" Grid.Column="1" x:Name="ComboComposition" DisplayMemberPath="Вид" Margin="10" />
+        <TextBox Text="{Binding Объем_затрат}" Grid.Column="2" Grid.Row="2" Margin="10"></TextBox>
+        <TextBox Text="{Binding Сырье.Количество_на_складе}" Name="txbCount" Grid.Column="2" Grid.Row="3" Margin="10" IsReadOnly="True" Width="350" HorizontalAlignment="Left" ></TextBox>
+        <Button Content="Заказать сырье" Name="BtnAddSupply" Grid.Column="2" Grid.Row="3" Margin="10" Width="150" HorizontalAlignment="Right" IsEnabled="False" Click="BtnAddSupply_Click"></Button>
+        <Button Content="Сохранить" Grid.ColumnSpan="2" Grid.Row="4" Name="BtnSave" Click="BtnSave_Click" Margin="10" IsEnabled="True"></Button>
     </Grid>
 </Page>

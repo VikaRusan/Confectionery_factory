@@ -16,10 +16,10 @@ namespace Confectionery_factory
     {
         public int Код_пост_изд { get; set; }
         public int Код_заказа { get; set; }
+        public Nullable<int> Код_склада_изделий { get; set; }
         public string Организация_поставщика { get; set; }
         public string Телефон_поставщика { get; set; }
         public string Адрес_покупателя { get; set; }
-        public string Телефон_покупателя { get; set; }
         public Nullable<System.DateTime> Дата_поставки { get; set; }
         public string Статус { get; set; }
     

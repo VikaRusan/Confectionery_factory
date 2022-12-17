@@ -129,6 +129,9 @@
     <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="SupplyProducts.xaml.cs">
+      <DependentUpon>SupplyProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SupplyRawMaterialsPage.xaml.cs">
       <DependentUpon>SupplyRawMaterialsPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Products.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SupplyProducts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

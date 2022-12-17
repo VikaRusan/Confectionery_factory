@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Confectionery_factory
 {
@@ -55,12 +46,40 @@ namespace Confectionery_factory
             }
             if (_currentOrder.Код_заказа == 0)
                 Кондитерская_фабрикаEntities1.GetContext().Заказы.Add(_currentOrder);
-
+           
             try
             {
-                Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
-                MessageBox.Show("Данные сохранены");
-                Manager.MainFrame.GoBack();
+                if (_currentOrder.Код_изделия != 0)
+                {
+                    var cost = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentOrder.Код_изделия).AsEnumerable();
+                        
+                        foreach (var i in cost)
+                        {
+                            var materials = Кондитерская_фабрикаEntities1.GetContext().Сырье.Where(p => p.Код_сырья == i.Код_сырья).FirstOrDefault();
+                            var count = i.Объем_затрат * _currentOrder.Количество_продукции;
+                        if (count <= materials.Количество_на_складе)
+                        {
+                            materials.Количество_на_складе = materials.Количество_на_складе - count;
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("На складе недостаточно сырья: "+ materials.Вид +"! Вы хотите закупить сырье сейчас?", "Уведомление",
+                    MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                            {
+                                Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
+                            }
+                            else 
+                            {
+                                Manager.MainFrame.Navigate(new Orders());
+                            }
+                        }
+                            Console.WriteLine(materials.Количество_на_складе);
+                            
+                        }
+                    Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
+                    MessageBox.Show("Данные сохранены");
+                    Manager.MainFrame.GoBack();
+                }
             }
             catch (Exception ex)
             {

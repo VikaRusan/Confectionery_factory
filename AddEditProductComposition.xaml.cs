@@ -28,14 +28,29 @@ namespace Confectionery_factory
             {
                 _currentComposition = selectedComposition;
             }
+
             InitializeComponent();
             DataContext = _currentComposition;
             ComboComposition.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Сырье.ToList();
+          
+
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
+            if (txbCount.Text == "0.00")
+            {
+                txbCount.BorderBrush = Brushes.Red;
+                BtnAddSupply.IsEnabled = true;
+                BtnSave.IsEnabled = false;
+                errors.AppendLine("Закончилось сырье на складе");
+            }
+            else
+            {
+                BtnAddSupply.IsEnabled = false;
+                BtnSave.IsEnabled = true;
+            }
             if (_currentComposition.Объем_затрат == 0)
                 errors.AppendLine("Укажите количество требуемого сырья");
 
@@ -57,6 +72,11 @@ namespace Confectionery_factory
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void BtnAddSupply_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
         }
     }
 }

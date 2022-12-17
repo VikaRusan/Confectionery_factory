@@ -28,7 +28,6 @@ namespace Confectionery_factory
         public int Количество_продукции { get; set; }
         public string Телефон_покупателя { get; set; }
         public Nullable<decimal> Стоимость { get; set; }
-        public string Статус { get; set; }
     
         public virtual Изделия Изделия { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

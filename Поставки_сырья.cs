@@ -18,7 +18,7 @@ namespace Confectionery_factory
         public int Код_сырья { get; set; }
         public string ФИО_менеджера { get; set; }
         public Nullable<System.DateTime> Дата_поставки { get; set; }
-        public Nullable<int> Количество_сырья { get; set; }
+        public Nullable<decimal> Количество_сырья { get; set; }
         public string Единица_измерения { get; set; }
         public string Организация_поставщика { get; set; }
         public string Телефон_поставщика { get; set; }

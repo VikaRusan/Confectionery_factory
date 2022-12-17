@@ -17,7 +17,7 @@ namespace Confectionery_factory
         public int Код_затрат { get; set; }
         public int Код_изделия { get; set; }
         public int Код_сырья { get; set; }
-        public Nullable<double> Объем_затрат { get; set; }
+        public Nullable<decimal> Объем_затрат { get; set; }
         public string Единица_измерения { get; set; }
         public Nullable<decimal> Стоимость { get; set; }
     

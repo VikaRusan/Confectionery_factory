@@ -66,20 +66,5 @@ namespace Confectionery_factory
             Manager.MainFrame.Navigate(page);
 
         }
-        private void btnAddOrder_Click(object sender, RoutedEventArgs e)
-        {
-            var btn = sender as Button;
-            btn.Visibility = Visibility.Hidden;
-        }
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-
-        }
-        private void btnMinus_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-
-        }
     }
 }

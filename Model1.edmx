@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище КондитерскаяФабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище КондитерскаяФабрикаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -27,7 +27,6 @@
           <Property Name="Количество_продукции" Type="int" Nullable="false" />
           <Property Name="Телефон_покупателя" Type="nchar" MaxLength="12" />
           <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Статус" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Затраты">
           <Key>
@@ -36,7 +35,7 @@
           <Property Name="Код_затрат" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Код_изделия" Type="int" Nullable="false" />
           <Property Name="Код_сырья" Type="int" Nullable="false" />
-          <Property Name="Объем_затрат" Type="float" />
+          <Property Name="Объем_затрат" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
           <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -73,10 +72,10 @@
           </Key>
           <Property Name="Код_пост_изд" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Код_заказа" Type="int" Nullable="false" />
+          <Property Name="Код_склада_изделий" Type="int" />
           <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
-          <Property Name="Телефон_поставщика" Type="nchar" MaxLength="12" />
+          <Property Name="Телефон_поставщика" Type="nchar" MaxLength="20" />
           <Property Name="Адрес_покупателя" Type="varchar" MaxLength="50" />
-          <Property Name="Телефон_покупателя" Type="nchar" MaxLength="12" />
           <Property Name="Дата_поставки" Type="date" />
           <Property Name="Статус" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -88,10 +87,10 @@
           <Property Name="Код_сырья" Type="int" Nullable="false" />
           <Property Name="ФИО_менеджера" Type="varchar" MaxLength="50" />
           <Property Name="Дата_поставки" Type="date" />
-          <Property Name="Количество_сырья" Type="int" />
+          <Property Name="Количество_сырья" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
           <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
-          <Property Name="Телефон_поставщика" Type="nchar" MaxLength="12" />
+          <Property Name="Телефон_поставщика" Type="nchar" MaxLength="20" />
           <Property Name="Статус" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Роли">
@@ -109,7 +108,25 @@
           <Property Name="Вид" Type="varchar" MaxLength="50" />
           <Property Name="Цена_ед_изм" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
+          <Property Name="Количество_на_складе" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "КондитерскаяФабрика.dbo.ИзделияView" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="ИзделияView">
+          <Property Name="Наименование изделия" Type="varchar" MaxLength="50" />
+          <Property Name="Категория" Type="varchar" MaxLength="50" />
+          <Property Name="Цена_шт" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "КондитерскаяФабрика.dbo.СоставView" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="СоставView">
+          <Property Name="Вид" Type="varchar" MaxLength="50" />
+          <Property Name="Цена_ед_изм" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+          <Property Name="Объем_затрат" Type="float" />
+          <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>-->
         <Association Name="FK_Заказы_Изделия">
           <End Role="Изделия" Type="Self.Изделия" Multiplicity="1" />
           <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
@@ -265,7 +282,8 @@
             <End Role="Поставки_сырья" EntitySet="Поставки_сырья" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="КондитерскаяФабрикаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -291,7 +309,6 @@
           <Property Name="Количество_продукции" Type="Int32" Nullable="false" />
           <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
           <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Изделия" Relationship="Self.FK_Заказы_Изделия" FromRole="Заказы" ToRole="Изделия" />
           <NavigationProperty Name="Поставки_изделий" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Заказы" ToRole="Поставки_изделий" />
         </EntityType>
@@ -302,7 +319,7 @@
           <Property Name="Код_затрат" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Код_изделия" Type="Int32" Nullable="false" />
           <Property Name="Код_сырья" Type="Int32" Nullable="false" />
-          <Property Name="Объем_затрат" Type="Double" />
+          <Property Name="Объем_затрат" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Изделия" Relationship="Self.FK_Затраты_Изделия" FromRole="Затраты" ToRole="Изделия" />
@@ -346,10 +363,10 @@
           </Key>
           <Property Name="Код_пост_изд" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Код_заказа" Type="Int32" Nullable="false" />
+          <Property Name="Код_склада_изделий" Type="Int32" />
           <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Телефон_поставщика" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Телефон_поставщика" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Адрес_покупателя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
           <Property Name="Дата_поставки" Type="DateTime" Precision="0" />
           <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Заказы" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Поставки_изделий" ToRole="Заказы" />
@@ -362,10 +379,10 @@
           <Property Name="Код_сырья" Type="Int32" Nullable="false" />
           <Property Name="ФИО_менеджера" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Дата_поставки" Type="DateTime" Precision="0" />
-          <Property Name="Количество_сырья" Type="Int32" />
+          <Property Name="Количество_сырья" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Телефон_поставщика" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Телефон_поставщика" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Сырье" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Поставки_сырья" ToRole="Сырье" />
         </EntityType>
@@ -385,6 +402,7 @@
           <Property Name="Вид" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Цена_ед_изм" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Количество_на_складе" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Затраты" Relationship="Self.FK_Затраты_Сырье" FromRole="Сырье" ToRole="Затраты" />
           <NavigationProperty Name="Поставки_сырья" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Сырье" ToRole="Поставки_сырья" />
         </EntityType>
@@ -581,7 +599,6 @@
                 <ScalarProperty Name="Количество_продукции" ColumnName="Количество_продукции" />
                 <ScalarProperty Name="Телефон_покупателя" ColumnName="Телефон_покупателя" />
                 <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
-                <ScalarProperty Name="Статус" ColumnName="Статус" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -632,10 +649,10 @@
               <MappingFragment StoreEntitySet="Поставки_изделий">
                 <ScalarProperty Name="Код_пост_изд" ColumnName="Код_пост_изд" />
                 <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+                <ScalarProperty Name="Код_склада_изделий" ColumnName="Код_склада_изделий" />
                 <ScalarProperty Name="Организация_поставщика" ColumnName="Организация_поставщика" />
                 <ScalarProperty Name="Телефон_поставщика" ColumnName="Телефон_поставщика" />
                 <ScalarProperty Name="Адрес_покупателя" ColumnName="Адрес_покупателя" />
-                <ScalarProperty Name="Телефон_покупателя" ColumnName="Телефон_покупателя" />
                 <ScalarProperty Name="Дата_поставки" ColumnName="Дата_поставки" />
                 <ScalarProperty Name="Статус" ColumnName="Статус" />
               </MappingFragment>
@@ -671,6 +688,7 @@
                 <ScalarProperty Name="Вид" ColumnName="Вид" />
                 <ScalarProperty Name="Цена_ед_изм" ColumnName="Цена_ед_изм" />
                 <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
+                <ScalarProperty Name="Количество_на_складе" ColumnName="Количество_на_складе" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

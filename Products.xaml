@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Изделия"></TextBlock>
 
-        <DataGrid x:Name="DGridProducts" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
+        <DataGrid x:Name="DGridProducts" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер изделия" Binding="{Binding Наименование}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Категория" Binding="{Binding Категории.Наименование}" Width="*"></DataGridTextColumn>

@@ -27,7 +27,6 @@
                 <DataGridTextColumn Header="Цена шт" Binding="{Binding Изделия.Цена_шт, StringFormat={}{0} руб.}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость, StringFormat={}{0} руб.}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон покупателя" Binding="{Binding Телефон_покупателя}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Статус" Binding="{Binding Статус}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

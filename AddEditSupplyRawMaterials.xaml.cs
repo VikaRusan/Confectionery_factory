@@ -33,8 +33,9 @@ namespace Confectionery_factory
         }
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+           
             StringBuilder errors = new StringBuilder();
-
+            _currentRawMaterials.Дата_поставки = Convert.ToDateTime(DPicker.Text);
             if (string.IsNullOrWhiteSpace(_currentRawMaterials.Организация_поставщика))
                 errors.AppendLine("Укажите организацию поставщика");
             if (string.IsNullOrWhiteSpace(_currentRawMaterials.ФИО_менеджера))
@@ -43,8 +44,6 @@ namespace Confectionery_factory
                 errors.AppendLine("Укажите количество сырья");
             if (string.IsNullOrWhiteSpace(_currentRawMaterials.Телефон_поставщика))
                 errors.AppendLine("Укажите телефон поставщика");
-            if (string.IsNullOrWhiteSpace(_currentRawMaterials.Дата_поставки.ToString()))
-                errors.AppendLine("Укажите дату поставки сырья");
 
             if (errors.Length > 0)
             {

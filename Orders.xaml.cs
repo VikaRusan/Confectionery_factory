@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace Confectionery_factory
 {
-    /// <summary>
-    /// Логика взаимодействия для Confectionery.xaml
-    /// </summary>
     public partial class Orders : Page
     {
         public Orders()

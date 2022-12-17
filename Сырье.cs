@@ -25,6 +25,7 @@ namespace Confectionery_factory
         public string Вид { get; set; }
         public Nullable<decimal> Цена_ед_изм { get; set; }
         public string Единица_измерения { get; set; }
+        public Nullable<decimal> Количество_на_складе { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Затраты> Затраты { get; set; }
