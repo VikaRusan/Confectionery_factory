@@ -19,15 +19,17 @@ namespace Confectionery_factory
     {
         public static Кондитерская_фабрикаEntities1 _context;
         public Кондитерская_фабрикаEntities1()
-            : base("name=Кондитерская_фабрикаEntities1")
+        : base("name=Кондитерская_фабрикаEntities1")
         {
         }
-        public static Кондитерская_фабрикаEntities1 GetContext() {
+        public static Кондитерская_фабрикаEntities1 GetContext()
 
+        {
             if (_context == null)
                 _context = new Кондитерская_фабрикаEntities1();
             return _context;
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

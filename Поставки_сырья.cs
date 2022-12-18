@@ -22,7 +22,6 @@ namespace Confectionery_factory
         public string Единица_измерения { get; set; }
         public string Организация_поставщика { get; set; }
         public string Телефон_поставщика { get; set; }
-        public string Статус { get; set; }
     
         public virtual Сырье Сырье { get; set; }
     }

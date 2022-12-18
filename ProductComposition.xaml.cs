@@ -24,7 +24,7 @@ namespace Confectionery_factory
             InitializeComponent();
             DataContext = _currentProduct;
 
-                var productComposition = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentProduct.Код_изделия).ToList();
+            var productComposition = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentProduct.Код_изделия).ToList();
 
             DGridComposition.ItemsSource = productComposition;
 
@@ -88,6 +88,14 @@ namespace Confectionery_factory
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
+            }
+        }
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Кондитерская_фабрикаEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DGridComposition.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentProduct.Код_изделия).ToList();
             }
         }
     }

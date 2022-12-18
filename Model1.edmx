@@ -25,7 +25,7 @@
           <Property Name="ФИО_менеджера" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Дата" Type="date" Nullable="false" />
           <Property Name="Количество_продукции" Type="int" Nullable="false" />
-          <Property Name="Телефон_покупателя" Type="nchar" MaxLength="12" />
+          <Property Name="Телефон_покупателя" Type="varchar" MaxLength="20" />
           <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Затраты">
@@ -36,7 +36,6 @@
           <Property Name="Код_изделия" Type="int" Nullable="false" />
           <Property Name="Код_сырья" Type="int" Nullable="false" />
           <Property Name="Объем_затрат" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
           <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Изделия">
@@ -91,7 +90,6 @@
           <Property Name="Единица_измерения" Type="nchar" MaxLength="2" />
           <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
           <Property Name="Телефон_поставщика" Type="nchar" MaxLength="20" />
-          <Property Name="Статус" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Роли">
           <Key>
@@ -307,7 +305,7 @@
           <Property Name="ФИО_менеджера" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Количество_продукции" Type="Int32" Nullable="false" />
-          <Property Name="Телефон_покупателя" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Телефон_покупателя" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Изделия" Relationship="Self.FK_Заказы_Изделия" FromRole="Заказы" ToRole="Изделия" />
           <NavigationProperty Name="Поставки_изделий" Relationship="Self.FK_Поставки_изделий_Заказы" FromRole="Заказы" ToRole="Поставки_изделий" />
@@ -320,7 +318,6 @@
           <Property Name="Код_изделия" Type="Int32" Nullable="false" />
           <Property Name="Код_сырья" Type="Int32" Nullable="false" />
           <Property Name="Объем_затрат" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Изделия" Relationship="Self.FK_Затраты_Изделия" FromRole="Затраты" ToRole="Изделия" />
           <NavigationProperty Name="Сырье" Relationship="Self.FK_Затраты_Сырье" FromRole="Затраты" ToRole="Сырье" />
@@ -383,7 +380,6 @@
           <Property Name="Единица_измерения" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Телефон_поставщика" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Сырье" Relationship="Self.FK_Поставки_сырья_Сырье" FromRole="Поставки_сырья" ToRole="Сырье" />
         </EntityType>
         <EntityType Name="Роли">
@@ -490,7 +486,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="КондитерскаяФабрикаEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Заказы" EntityType="Self.Заказы" />
           <EntitySet Name="Затраты" EntityType="Self.Затраты" />
@@ -576,7 +572,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище КондитерскаяФабрикаModelContainer" CdmEntityContainer="КондитерскаяФабрикаEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище КондитерскаяФабрикаModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="КондитерскаяФабрикаModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -609,7 +605,6 @@
                 <ScalarProperty Name="Код_изделия" ColumnName="Код_изделия" />
                 <ScalarProperty Name="Код_сырья" ColumnName="Код_сырья" />
                 <ScalarProperty Name="Объем_затрат" ColumnName="Объем_затрат" />
-                <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
                 <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -669,7 +664,6 @@
                 <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
                 <ScalarProperty Name="Организация_поставщика" ColumnName="Организация_поставщика" />
                 <ScalarProperty Name="Телефон_поставщика" ColumnName="Телефон_поставщика" />
-                <ScalarProperty Name="Статус" ColumnName="Статус" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

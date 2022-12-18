@@ -28,17 +28,16 @@ namespace Confectionery_factory
             {
                 _currentComposition = selectedComposition;
             }
-
             InitializeComponent();
             DataContext = _currentComposition;
+            ComboProduct.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
             ComboComposition.ItemsSource = Кондитерская_фабрикаEntities1.GetContext().Сырье.ToList();
-          
-
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
+            
             if (txbCount.Text == "0.00")
             {
                 txbCount.BorderBrush = Brushes.Red;
@@ -59,6 +58,7 @@ namespace Confectionery_factory
                 MessageBox.Show(errors.ToString());
                 return;
             }
+            Console.WriteLine(_currentComposition.Код_затрат + " " + _currentComposition.Код_изделия);
             if (_currentComposition.Код_затрат == 0)
                 Кондитерская_фабрикаEntities1.GetContext().Затраты.Add(_currentComposition);
 

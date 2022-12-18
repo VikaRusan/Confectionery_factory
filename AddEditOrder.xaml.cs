@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -44,42 +45,58 @@ namespace Confectionery_factory
                 MessageBox.Show(errors.ToString());
                 return;
             }
+            
             if (_currentOrder.Код_заказа == 0)
                 Кондитерская_фабрикаEntities1.GetContext().Заказы.Add(_currentOrder);
-           
+            var er = new List<string>();
+            if (_currentOrder.Код_изделия != 0)
+            {
+                var cost = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentOrder.Код_изделия).AsEnumerable();
+               
+                foreach (var i in cost)
+                {
+                    var materials = Кондитерская_фабрикаEntities1.GetContext().Сырье.Where(p => p.Код_сырья == i.Код_сырья).FirstOrDefault();
+                    var count = i.Объем_затрат * _currentOrder.Количество_продукции;
+                    if (count <= materials.Количество_на_складе)
+                    {
+                        materials.Количество_на_складе = materials.Количество_на_складе - count;
+                    }
+                    else
+                    {
+                        er.Add(i.Сырье.Вид);
+                    }
+                }
+                
+            }
+
             try
             {
-                if (_currentOrder.Код_изделия != 0)
+                if (er.Count() != 0)
                 {
-                    var cost = Кондитерская_фабрикаEntities1.GetContext().Затраты.Where(p => p.Код_изделия == _currentOrder.Код_изделия).AsEnumerable();
-                        
-                        foreach (var i in cost)
-                        {
-                            var materials = Кондитерская_фабрикаEntities1.GetContext().Сырье.Where(p => p.Код_сырья == i.Код_сырья).FirstOrDefault();
-                            var count = i.Объем_затрат * _currentOrder.Количество_продукции;
-                        if (count <= materials.Количество_на_складе)
-                        {
-                            materials.Количество_на_складе = materials.Количество_на_складе - count;
-                        }
-                        else
-                        {
-                            if (MessageBox.Show("На складе недостаточно сырья: "+ materials.Вид +"! Вы хотите закупить сырье сейчас?", "Уведомление",
+                    string str = "Недостаточно сырья на складе: ";
+                    foreach (var i in er)
+                    {
+                        str += "\n" + i + "\n";
+                    }
+                    Кондитерская_фабрикаEntities1.GetContext().Заказы.Remove(_currentOrder);
+
+                    if (MessageBox.Show(str + "Вы хотите закупить сырье сейчас?", "Уведомление",
                     MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-                            {
-                                Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
-                            }
-                            else 
-                            {
-                                Manager.MainFrame.Navigate(new Orders());
-                            }
-                        }
-                            Console.WriteLine(materials.Количество_на_складе);
-                            
-                        }
+                    {
+                        Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
                     Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
                     MessageBox.Show("Данные сохранены");
                     Manager.MainFrame.GoBack();
                 }
+                
             }
             catch (Exception ex)
             {

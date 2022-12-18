@@ -35,8 +35,7 @@
         <TextBox Text="{Binding ФИО_менеджера}" Grid.Column="1" Grid.Row="3"></TextBox>
         <TextBox  Text="{Binding Количество_продукции}" Grid.Column="1" Grid.Row="4"></TextBox>
         <TextBox Text="{Binding Телефон_покупателя}" Grid.Column="1" Grid.Row="5"></TextBox>
-        <TextBox Text="{Binding Дата, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Grid.Column="1" Grid.Row="6"></TextBox>
-
+        <DatePicker Name="DPicker" SelectedDate="2022-12-31" SelectedDateFormat="Short" Grid.Column="1" Grid.Row="6" Text="{Binding Дата, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
         <Button Content="Сохранить" Grid.ColumnSpan="2" Grid.Row="7" Name="BtnSave" Click="BtnSave_Click"></Button>
     </Grid>
 </Page>

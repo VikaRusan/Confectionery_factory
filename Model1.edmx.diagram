@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="78d9777d7eaf4b53be5a6614719be373" Name="Diagram1">
+      <Diagram DiagramId="5e4b7d4d38a64a8797d1f9ec88f2631d" Name="Diagram1">
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Заказы" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Затраты" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Изделия" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Категории" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Изделия" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Категории" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Пользователь" Width="1.5" PointX="8" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Поставки_изделий" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Поставки_изделий" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Поставки_сырья" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Роли" Width="1.5" PointX="5.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Сырье" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="КондитерскаяФабрикаModel.Сырье" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Заказы_Изделия" ManuallyRouted="false" />
         <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Поставки_изделий_Заказы" ManuallyRouted="false" />
         <AssociationConnector Association="КондитерскаяФабрикаModel.FK_Затраты_Изделия" ManuallyRouted="false" />
