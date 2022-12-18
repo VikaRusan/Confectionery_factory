@@ -22,7 +22,6 @@
                 <DataGridTextColumn Header="ФИО менеджера" Binding="{Binding Заказы.ФИО_менеджера}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата поставки" Binding="{Binding Дата_поставки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Организация поставщика" Binding="{Binding Организация_поставщика}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Адрес поставщика" Binding="{Binding Адрес_поставщика}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон поставщика" Binding="{Binding Телефон_поставщика}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Статус" Binding="{Binding Статус}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">

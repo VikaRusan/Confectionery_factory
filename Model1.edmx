@@ -71,7 +71,6 @@
           </Key>
           <Property Name="Код_пост_изд" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Код_заказа" Type="int" Nullable="false" />
-          <Property Name="Код_склада_изделий" Type="int" />
           <Property Name="Организация_поставщика" Type="varchar" MaxLength="50" />
           <Property Name="Телефон_поставщика" Type="nchar" MaxLength="20" />
           <Property Name="Адрес_покупателя" Type="varchar" MaxLength="50" />
@@ -360,7 +359,6 @@
           </Key>
           <Property Name="Код_пост_изд" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Код_заказа" Type="Int32" Nullable="false" />
-          <Property Name="Код_склада_изделий" Type="Int32" />
           <Property Name="Организация_поставщика" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Телефон_поставщика" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Адрес_покупателя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -644,7 +642,6 @@
               <MappingFragment StoreEntitySet="Поставки_изделий">
                 <ScalarProperty Name="Код_пост_изд" ColumnName="Код_пост_изд" />
                 <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
-                <ScalarProperty Name="Код_склада_изделий" ColumnName="Код_склада_изделий" />
                 <ScalarProperty Name="Организация_поставщика" ColumnName="Организация_поставщика" />
                 <ScalarProperty Name="Телефон_поставщика" ColumnName="Телефон_поставщика" />
                 <ScalarProperty Name="Адрес_покупателя" ColumnName="Адрес_покупателя" />

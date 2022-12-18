@@ -27,15 +27,15 @@ namespace Confectionery_factory
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
+            Manager.MainFrame.Navigate(new AddEditSupplyProducts(null));
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials(null));
+            Manager.MainFrame.Navigate(new AddEditSupplyProducts(null));
         }
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditSupplyRawMaterials((sender as Button).DataContext as Поставки_сырья));
+            Manager.MainFrame.Navigate(new AddEditSupplyProducts((sender as Button).DataContext as Поставки_изделий));
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {

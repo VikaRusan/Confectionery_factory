@@ -73,6 +73,9 @@
     <Compile Include="AddEditProductComposition.xaml.cs">
       <DependentUpon>AddEditProductComposition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditSupplyProducts.xaml.cs">
+      <DependentUpon>AddEditSupplyProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEditSupplyRawMaterials.xaml.cs">
       <DependentUpon>AddEditSupplyRawMaterials.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEditProductComposition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditSupplyProducts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

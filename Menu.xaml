@@ -17,7 +17,7 @@
             <MenuItem x:Name="Products" Header="Изделия" Click="Products_Click" ></MenuItem>
             <MenuItem x:Name="Orders" Header="Заказы" Click="Orders_Click" ></MenuItem>
             <MenuItem x:Name="SupplyRawMaterials" Header="Поставки сырья" Click="SupplyRawMaterials_Click"></MenuItem>
-            <MenuItem x:Name="Supply" Header="Поставки изделий"></MenuItem>
+            <MenuItem x:Name="Supply" Header="Поставки изделий" Click="Supply_Click"></MenuItem>
         </Menu>
         <Frame Grid.Row="1" x:Name="MainFrameMenu" NavigationUIVisibility="Hidden" ></Frame>
         <TextBlock Name="txbNameRole" Foreground="#B15124" Text="{Binding Пользователь.Имя}" HorizontalAlignment="Right"></TextBlock>

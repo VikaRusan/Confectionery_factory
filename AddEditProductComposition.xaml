@@ -21,7 +21,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Состав изделия"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Foreground="#B15124" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" Text="Поставка сырья"/>
         <TextBlock Text="Изделие" Grid.Row="1" />
         <TextBlock Text="Сырье" Grid.Row="2" />
         <TextBlock Text="Сколько требуется сырья" Grid.Row="3" ></TextBlock>

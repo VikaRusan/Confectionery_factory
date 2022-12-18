@@ -38,5 +38,10 @@ namespace Confectionery_factory
         {
             MainFrameMenu.Navigate(new SupplyRawMaterialsPage());
         }
+
+        private void Supply_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrameMenu.Navigate(new SupplyProducts());
+        }
     }
 }
