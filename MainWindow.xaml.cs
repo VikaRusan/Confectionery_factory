@@ -59,6 +59,7 @@ namespace Confectionery_factory
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
+            BtnBack.Visibility = Visibility.Hidden;
             MainFrame.Navigate(new Authorization());
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e)
