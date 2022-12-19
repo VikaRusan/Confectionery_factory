@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Confectionery_factory"
         mc:Ignorable="d"
-        Title="Кондитерская фабрика" Height="450" Width="800">
+        Title="Кондитерская фабрика" Height="450" Width="800" WindowState="Maximized">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -18,8 +18,8 @@
         <Grid Background="#FCD778" Panel.ZIndex="-2"></Grid>
         <Frame ContentRendered="MainFrame_ContentRendered" Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" ></Frame>
 
-        <Button Content="Выйти" Grid.Row="0" Background="#FDF4E3" FontSize="18" FontWeight="Bold" Foreground="#B15124" Name="BtnExit" Width="100" Height="30" HorizontalAlignment="Right" Margin="10" Click="BtnExit_Click"></Button>
-        <Button  Content="Назад" Grid.Row="0"  Background="#FDF4E3" FontSize="18"  FontWeight="Bold" Foreground="#B15124" Name="BtnBack" Width="100" Height="30" HorizontalAlignment="Right" Margin="0 0 120 0" Click="BtnBack_Click"></Button>
+        <Button Content="Выйти" Grid.Row="0" Background="#FDF4E3" FontSize="18" FontWeight="Bold" Foreground="#B15124" Name="BtnExit" Width="100" Height="30" HorizontalAlignment="Right" Margin="10" Click="BtnExit_Click" Visibility="Hidden"></Button>
+        <Button  Content="Назад" Grid.Row="0"  Background="#FDF4E3" FontSize="18"  FontWeight="Bold" Foreground="#B15124" Name="BtnBack" Width="100" Height="30" HorizontalAlignment="Right" Margin="0 0 120 0" Click="BtnBack_Click" Visibility="Hidden"></Button>
         <Grid Grid.Row="2" Background="#FFA000"></Grid>
     </Grid>
     

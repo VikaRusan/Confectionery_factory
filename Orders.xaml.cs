@@ -58,7 +58,7 @@ namespace Confectionery_factory
 
         private void BtnStat_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new OrderStatistics());
+            Manager.MainFrameMenu.Navigate(new OrderStatistics());
         }
     }
 }

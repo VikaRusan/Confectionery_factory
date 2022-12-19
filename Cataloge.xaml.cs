@@ -20,10 +20,13 @@ namespace Confectionery_factory
     /// </summary>
     public partial class Cataloge : Page
     {
-        public int k = 0;
-       
-        public Cataloge()
+        int role;
+        public Cataloge(int selectedRole)
         {
+            if(selectedRole != 0)
+            {
+                role = selectedRole;
+            }
             InitializeComponent();
             var allTypes = Кондитерская_фабрикаEntities1.GetContext().Категории.ToList();
             allTypes.Insert(0, new Категории
@@ -57,14 +60,35 @@ namespace Confectionery_factory
 
         private void btnComposition_Click(object sender, RoutedEventArgs e)
         {
-            ProductComposition page = new ProductComposition((sender as Button).DataContext as Изделия);
-            page.BtnAddComposition.Visibility = Visibility.Hidden;
-            page.BtnAddComposition.IsEnabled = false;
-            page.BtnDeleteComposition.Visibility = Visibility.Hidden;
-            page.BtnDeleteComposition.IsEnabled = false;
-            page.DGridTemp.Visibility = Visibility.Hidden;
-            Manager.MainFrame.Navigate(page);
-
+            if (role == 3)
+            {
+                ProductComposition page = new ProductComposition((sender as Button).DataContext as Изделия);
+                page.BtnAddComposition.Visibility = Visibility.Hidden;
+                page.BtnAddComposition.IsEnabled = false;
+                page.BtnDeleteComposition.Visibility = Visibility.Hidden;
+                page.BtnDeleteComposition.IsEnabled = false;
+                page.DGridTemp.Visibility = Visibility.Hidden;
+                Manager.MainFrame.Navigate(page);
+            }
+            else
+            {
+                ProductComposition page = new ProductComposition((sender as Button).DataContext as Изделия);
+                page.BtnAddComposition.Visibility = Visibility.Visible;
+                page.BtnAddComposition.IsEnabled = true;
+                page.BtnDeleteComposition.Visibility = Visibility.Visible;
+                page.BtnDeleteComposition.IsEnabled = true;
+                page.DGridTemp.Visibility = Visibility.Visible;
+                Manager.MainFrame.Navigate(page); 
+            }
+        }
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Кондитерская_фабрикаEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                var currentConfectionery = Кондитерская_фабрикаEntities1.GetContext().Изделия.ToList();
+                LViewTours.ItemsSource = currentConfectionery;
+            }
         }
     }
 }

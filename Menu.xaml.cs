@@ -24,6 +24,7 @@ namespace Confectionery_factory
         {
             Manager.MainFrameMenu = MainFrameMenu;
             InitializeComponent();
+            MainFrameMenu.Navigate(new Cataloge(2));
         }
         private void Products_Click(object sender, RoutedEventArgs e)
         {

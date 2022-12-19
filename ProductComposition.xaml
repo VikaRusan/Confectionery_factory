@@ -24,11 +24,11 @@
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DGridComposition" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Сырье" Binding="{Binding Сырье.Вид}" Width="*"/>
-                <DataGridTextColumn Header="Цена за единицу измерения" Binding="{Binding Сырье.Цена_ед_изм}"  Width="*"/>
+                <DataGridTextColumn Header="Цена за единицу измерения" Binding="{Binding Сырье.Цена_ед_изм, StringFormat={}{0} руб.}"  Width="*"/>
                 <DataGridTextColumn Header="Количество на складе" Binding="{Binding Сырье.Количество_на_складе}"  Width="*"/>
                 <DataGridTextColumn Header="Требуется сырья" Binding="{Binding Объем_затрат}"  Width="*"/>
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Сырье.Единица_измерения}" Width="*"/>
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}"  Width="*"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость, StringFormat={}{0} руб.}"  Width="*"/>
                 <DataGridTemplateColumn Width="auto" Visibility="Visible" x:Name="DGridTemp"> 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

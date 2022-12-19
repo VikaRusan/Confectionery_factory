@@ -56,7 +56,8 @@ namespace Confectionery_factory
             try
             {
                 Кондитерская_фабрикаEntities1.GetContext().SaveChanges();
-                MessageBox.Show("Данные сохранены");
+                MessageBox.Show("Данные сохранены", "Уведомление",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 Manager.MainFrame.GoBack();
             }
             catch (Exception ex)

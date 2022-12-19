@@ -21,7 +21,7 @@ namespace Confectionery_factory
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        bool btn = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -59,8 +59,17 @@ namespace Confectionery_factory
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            BtnBack.Visibility = Visibility.Hidden;
-            MainFrame.Navigate(new Authorization());
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Уведомление",
+                    MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                btn = true;
+                MainFrame.Navigate(new Authorization());
+                
+            }
+            else
+            {
+                return;
+            }
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -71,11 +80,14 @@ namespace Confectionery_factory
             if (MainFrame.CanGoBack)
             {
                 BtnBack.Visibility = Visibility.Visible;
+                BtnExit.Visibility = Visibility.Visible;
             }
-            else
+            if(btn == true || MainFrame.CanGoBack == false)
             {
                 BtnBack.Visibility = Visibility.Hidden;
+                BtnExit.Visibility = Visibility.Hidden;
             }
+            
         }
     }
 }

@@ -66,7 +66,7 @@ namespace Confectionery_factory
                         case 3:
                             MessageBox.Show("Здравствуйте, Заказчик " + userObj.Имя + "!",
                         "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            Manager.MainFrame.Navigate(new Cataloge());
+                            Manager.MainFrame.Navigate(new Cataloge(userObj.Код_роли));
                             break;
                         default: MessageBox.Show("Данные не обнаружены!",
                             "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
